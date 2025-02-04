@@ -12,7 +12,6 @@ gopeed.events.onResolve(async function (ctx) {
     if (pathParts[0] != 'models' && pathParts[0] != 'datasets' && pathParts[0] != 'spaces') {
       pathParts = ['models', ...pathParts];
     }
-    const [user, repo] = pathParts.slice(1, 3);
     // 构造API请求地址（兼容基础域名）
     let path = pathParts.join('/');
     path = path.replace('master', 'main');
@@ -42,8 +41,12 @@ gopeed.events.onResolve(async function (ctx) {
       });
     };
 
+    let folderName = pathParts
+      .filter((item) => item != 'tree' && item != 'main' && item != 'models' && item != 'datasets')
+      .join('_');
+    folderName = folderName.substring(0, folderName.length - 1);
     ctx.res = {
-      name: `${user}-${repo}`,
+      name: folderName,
       files: walkFiles(data),
     };
   } catch (err) {
