@@ -1,6 +1,6 @@
 {
   "name": "gopeed-extention-huggingface",
-  "author": "",
+  "author": "zayn",
   "title": "Huggingface下载",
   "description": "支持Huggingface模型、数据集的文件夹解析下载, 可自由替换 Huggingface下载地址\n使用方法请看主页",
   "icon": "icon.png",
