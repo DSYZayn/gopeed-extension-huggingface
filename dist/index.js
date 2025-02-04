@@ -71,10 +71,10 @@ gopeed.events.onResolve(async function (ctx) {
         };
       });
     };
+    gopeed.logger.debug(pathParts);
     var folderName = pathParts.filter(function (item) {
       return item != 'tree' && item != 'main' && item != 'models' && item != 'datasets';
     }).join('_');
-    folderName = folderName.substring(0, folderName.length - 1);
     ctx.res = {
       name: folderName,
       files: walkFiles(data)
