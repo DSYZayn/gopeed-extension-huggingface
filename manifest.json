@@ -1,0 +1,22 @@
+{
+  "name": "gopeed-extention-huggingface",
+  "author": "",
+  "title": "Huggingface下载",
+  "description": "支持Huggingface模型、数据集、空间下载, 可自由替换 Huggingface下载地址\n使用方法请看主页",
+  "icon": "icon.png",
+  "version": "1.0.0",
+  "homepage": "",
+  "repository": {
+    "url": ""
+  },
+  "scripts": [
+    {
+      "event": "onResolve",
+      "match": {
+        "urls": ["*://huggingface.co/*", "*://hf-mirror.com/*", "*://www.modelscope.cn/*"]
+      },
+      "entry": "dist/index.js"
+    }
+  ],
+  "settings": []
+}
