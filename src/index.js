@@ -29,6 +29,9 @@ gopeed.events.onResolve(async function (ctx) {
         if (item.type != 'file') {
           return [];
         }
+        if (branch == 'main' && path.includes('models')) {
+          path = path.replace('models/', '');
+        }
         let name = item.path.split('/');
         name = name[name.length - 1];
         return {
