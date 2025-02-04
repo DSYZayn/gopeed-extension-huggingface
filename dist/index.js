@@ -1,1 +1,96 @@
-(()=>{"use strict";function e(e,r){(null==r||r>e.length)&&(r=e.length);for(var t=0,a=Array(r);t<r;t++)a[t]=e[t];return a}gopeed.events.onResolve((async function(r){try{var t=new URL(r.req.url),a=t.host,n="www.modelscope.cn"===a?"master":"main",o=t.protocol,c=t.port||("https:"===o?443:80),s=t.pathname.substring(1).split("/");if(s.includes("resolve"))return;"models"!=s[0]&&"datasets"!=s[0]&&"spaces"!=s[0]&&(s=["models"].concat(function(r){if(Array.isArray(r))return e(r)}(d=s)||function(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}(d)||function(r,t){if(r){if("string"==typeof r)return e(r,t);var a={}.toString.call(r).slice(8,-1);return"Object"===a&&r.constructor&&(a=r.constructor.name),"Map"===a||"Set"===a?Array.from(r):"Arguments"===a||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a)?e(r,t):void 0}}(d)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()));var i=s.join("/");i=i.replace("master","main"),gopeed.logger.debug(i);var l="https://hf-mirror.com/api/".concat(i);gopeed.logger.debug(l);var u=await fetch(l,{headers:{Accept:"application/json"}});if(!u.ok)throw new Error("API Error: ".concat(u.status," ").concat(await u.text()));var m=await u.json();gopeed.logger.debug(s);var p=s.filter((function(e){return"tree"!=e&&"main"!=e&&"models"!=e&&"datasets"!=e})).join("_");r.res={name:p,files:(f=m,f.flatMap((function(e){if("file"!=e.type)return[];"main"==n&&i.includes("models")&&(i=i.replace("models/",""));var r=e.path.split("/");return{name:r=r[r.length-1],size:e.size,req:{url:"".concat(o,"//").concat(a,":").concat(c,"/").concat(i.replace("tree","resolve").replace("main","".concat(n)),"/").concat(r)}}})))}}catch(e){console.error("[HF Parser]",e),r.res={error:{message:"解析失败: ".concat(e.message),details:e.stack}}}var d,f}))})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	// The require scope
+/******/ 	var __webpack_require__ = {};
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+__webpack_require__.r(__webpack_exports__);
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+gopeed.events.onResolve(async function (ctx) {
+  try {
+    var url = new URL(ctx.req.url);
+    var baseUrl = url.host;
+    var branch = baseUrl === 'www.modelscope.cn' ? 'master' : 'main';
+    var protocol = url.protocol;
+    var port = url.port || (protocol === 'https:' ? 443 : 80);
+    var pathParts = url.pathname.substring(1).split('/');
+    if (pathParts.includes('resolve')) {
+      return;
+    }
+    if (pathParts[0] != 'models' && pathParts[0] != 'datasets' && pathParts[0] != 'spaces') {
+      pathParts = ['models'].concat(_toConsumableArray(pathParts));
+    }
+    // 构造API请求地址（兼容基础域名）
+    var path = pathParts.join('/');
+    path = path.replace('master', 'main');
+    gopeed.logger.debug(path);
+    var apiPath = "https://hf-mirror.com/api/".concat(path);
+    gopeed.logger.debug(apiPath);
+    var resp = await fetch(apiPath, {
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+    if (!resp.ok) throw new Error("API Error: ".concat(resp.status, " ").concat(await resp.text()));
+    var data = await resp.json();
+    // 递归解析文件结构
+    var walkFiles = function walkFiles(items) {
+      return items.flatMap(function (item) {
+        if (item.type != 'file') {
+          return [];
+        }
+        if (branch == 'main' && path.includes('models')) {
+          path = path.replace('models/', '');
+        }
+        var name = item.path.split('/');
+        name = name[name.length - 1];
+        return {
+          name: name,
+          size: item.size,
+          req: {
+            url: "".concat(protocol, "//").concat(baseUrl, ":").concat(port, "/").concat(path.replace('tree', 'resolve').replace('main', "".concat(branch)), "/").concat(name)
+          }
+        };
+      });
+    };
+    gopeed.logger.debug(pathParts);
+    var folderName = pathParts.filter(function (item) {
+      return item != 'tree' && item != 'main' && item != 'models' && item != 'datasets';
+    }).join('_');
+    ctx.res = {
+      name: folderName,
+      files: walkFiles(data)
+    };
+  } catch (err) {
+    console.error('[HF Parser]', err);
+    ctx.res = {
+      error: {
+        message: "\u89E3\u6790\u5931\u8D25: ".concat(err.message),
+        details: err.stack
+      }
+    };
+  }
+});
+/******/ })()
+;
