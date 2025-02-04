@@ -6,6 +6,9 @@ gopeed.events.onResolve(async function (ctx) {
     const protocol = url.protocol;
     const port = url.port || (protocol === 'https:' ? 443 : 80);
     let pathParts = url.pathname.substring(1).split('/');
+    if (pathParts.includes('resolve')) {
+      return;
+    }
     if (pathParts[0] != 'models' && pathParts[0] != 'datasets' && pathParts[0] != 'spaces') {
       pathParts = ['models', ...pathParts];
     }
