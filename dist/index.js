@@ -39,6 +39,9 @@ gopeed.events.onResolve(async function (ctx) {
     var protocol = url.protocol;
     var port = url.port || (protocol === 'https:' ? 443 : 80);
     var pathParts = url.pathname.substring(1).split('/');
+    if (pathParts.includes('resolve')) {
+      return;
+    }
     if (pathParts[0] != 'models' && pathParts[0] != 'datasets' && pathParts[0] != 'spaces') {
       pathParts = ['models'].concat(_toConsumableArray(pathParts));
     }
