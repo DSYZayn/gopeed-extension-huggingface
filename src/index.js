@@ -57,7 +57,7 @@ gopeed.events.onResolve(async function (ctx) {
         path: `${repo}${b_path}`,
         size: item.size,
         req: {
-          url: `${protocol}//${baseUrl}:${port}/${a_path}${b_path}/${name}`,
+          url: `${protocol}//${baseUrl}:${port}/${a_path}/${name}`,
         },
       };
     });
