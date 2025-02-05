@@ -50,7 +50,9 @@ gopeed.events.onResolve(async function (ctx) {
         name = name[name.length - 1];
       }
 
-      a_path = a_path.replace(b_path, '');
+      // e.g. a_path = /models/unsloth/DeepSeek-R1-GGUF/tree/main/DeepSeek-R1-UD-IQ1_M and b_path = /DeepSeek-R1-UD-IQ1_M
+      // a_path = a_path.replace(b_path, ''); // 去除b_path， 但a_path可能存在与b_path重复的字符串
+      a_path = a_path.replace(new RegExp(`${b_path}(?!.*${b_path})`), ''); // 只删除最后一个与b_path相同的字符串
       gopeed.logger.debug('a_path:', a_path);
       gopeed.logger.debug('name:', name);
       gopeed.logger.debug('b_path:', b_path);
