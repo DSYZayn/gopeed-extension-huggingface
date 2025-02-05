@@ -42,7 +42,6 @@ gopeed.events.onResolve(async function (ctx) {
       if (branch == 'main' && path.includes('models')) {
         a_path = a_path.replace('models/', '');
       }
-      gopeed.logger.debug('a_path:', a_path);
       let name = item.path;
       let b_path = '';
       if (name.includes('/')) {
@@ -50,6 +49,9 @@ gopeed.events.onResolve(async function (ctx) {
         b_path = '/' + name.slice(0, -1);
         name = name[name.length - 1];
       }
+
+      a_path = a_path.replace(b_path, '');
+      gopeed.logger.debug('a_path:', a_path);
       gopeed.logger.debug('name:', name);
       gopeed.logger.debug('b_path:', b_path);
       return {
@@ -57,7 +59,7 @@ gopeed.events.onResolve(async function (ctx) {
         path: `${repo}${b_path}`,
         size: item.size,
         req: {
-          url: `${protocol}//${baseUrl}:${port}/${a_path}/${name}`,
+          url: `${protocol}//${baseUrl}:${port}/${a_path}${b_path}/${name}`,
         },
       };
     });
