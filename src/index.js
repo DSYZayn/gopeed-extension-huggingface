@@ -13,6 +13,7 @@ gopeed.events.onResolve(async function (ctx) {
     });
     if (!resp.ok) throw new Error(`Failed to fetch ${apiPath}`);
     const data = await resp.json();
+    /* eslint-disable no-undef */
     const result = await Promise.all(
       data.map(async (item) => {
         if (item.type === 'directory') return await getMetaData(`${path}/${item.path}`);
