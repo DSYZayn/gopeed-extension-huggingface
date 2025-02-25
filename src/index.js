@@ -49,7 +49,7 @@ gopeed.events.onResolve(async function (ctx) {
       let b_path = '';
       if (name.includes('/')) {
         name = item.path.split('/');
-        b_path = '/' + name.slice(0, -1);
+        b_path = '/' + name.slice(0, -1).join('/');
         name = name[name.length - 1];
       }
 
@@ -107,6 +107,7 @@ gopeed.events.onResolve(async function (ctx) {
       name: user,
       files: walkFiles(data, branch, path, protocol, baseUrl, port, repo),
     };
+    gopeed.logger.debug('ctx.res:', JSON.stringify(ctx.res));
   } catch (err) {
     gopeed.logger.error('[HF Parser]', err);
     ctx.res = {
