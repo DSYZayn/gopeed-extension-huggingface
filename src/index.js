@@ -1,11 +1,12 @@
 gopeed.events.onResolve(async function (ctx) {
   /**
    * 获取模型元数据 || Get Model Metadata
-   * @param {string} basePath - 基础路径. e.g. tree/main
+   * @param {string} basePath - 基础路径. e.g. models/KwaiVGI/LivePortrait/tree/main,
    * @param {string} filepath - 文件路径. e.g. insightface/models/buffalo_l
    * @returns {Promise<import('@gopeed/types').FileInfo[]>}
    */
   async function getMetaData(basePath, filepath) {
+    gopeed.logger.debug('basePath:', basePath, 'filepath:', filepath);
     const path = filepath ? `${basePath}/${filepath}` : basePath;
     // hf-mirror或huggingface.co
     const apiPath = `https://hf-mirror.com/api/${path}`;
@@ -55,7 +56,7 @@ gopeed.events.onResolve(async function (ctx) {
 
       // e.g. a_path = /models/unsloth/DeepSeek-R1-GGUF/tree/main/DeepSeek-R1-UD-IQ1_M and b_path = /DeepSeek-R1-UD-IQ1_M
       // a_path = a_path.replace(b_path, ''); // 去除b_path， 但a_path可能存在与b_path重复的字符串
-      a_path = a_path.replace(new RegExp(`${b_path}(?!.*${b_path})`), ''); // 只删除最后一个与b_path相同的字符串
+      a_path = a_path.replace(new RegExp(`${b_path}(?!.*${b_path})`, 'g'), ''); // 只删除最后一个与b_path相同的字符串
       gopeed.logger.debug('a_path:', a_path);
       gopeed.logger.debug('name:', name);
       gopeed.logger.debug('b_path:', b_path);
@@ -97,15 +98,30 @@ gopeed.events.onResolve(async function (ctx) {
     // 构造API请求地址（兼容基础域名）
     // 由于modelscope缺乏高效的元信息获取API，统一使用hf-mirror来获取元信息
     // 因此暂时只支持下载modelscope中与hf-mirror同名的数据
-    let path = pathParts.join('/');
-    path = path.replace('master', 'main');
-    gopeed.logger.debug(path);
-    gopeed.logger.debug(pathParts);
 
-    const data = await getMetaData(path);
+    let filepath = '';
+    /**
+     * 构建basePathParts
+     * @param {string} pathParts
+     * @returns {string []} basePathParts
+     */
+    const basePathParts = (pathParts) => {
+      if (pathParts.length === 0) return [];
+      if (pathParts[pathParts.length - 2] === 'tree') {
+        return pathParts;
+      }
+      gopeed.logger.debug('basePathParts:', pathParts);
+      filepath = filepath === '' ? pathParts.pop() : pathParts.pop() + '/' + filepath;
+      gopeed.logger.debug('function basePathParts--filepath:', filepath);
+      return basePathParts(pathParts);
+    };
+    let basePath = basePathParts(pathParts).join('/');
+    basePath = basePath.replace('master', 'main');
+
+    const data = await getMetaData(basePath, filepath);
     ctx.res = {
       name: user,
-      files: walkFiles(data, branch, path, protocol, baseUrl, port, repo),
+      files: walkFiles(data, branch, basePath, protocol, baseUrl, port, repo),
     };
     gopeed.logger.debug('ctx.res:', JSON.stringify(ctx.res));
   } catch (err) {
