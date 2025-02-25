@@ -1,3 +1,12 @@
+<!--
+ * @Author: zayn 1546492103@qq.com
+ * @Date: 2025-02-04 02:34:49
+ * @LastEditors: zayn 1546492103@qq.com
+ * @LastEditTime: 2025-02-25 12:13:36
+ * @FilePath: \gopeed-extension-huggingface\README.md
+ * @Description: 
+ * 
+-->
 # Gopeed Extension Huggingface
 
 ## Feature
@@ -22,9 +31,9 @@
 - **repoType**: models || datasets
 - **path**: 文件夹路径， 如果是根目录则不填, 连同`main/`最后的`/`一起去掉
 
-- ~~❌ 不支持递归解析，因为gopeed不支持自动创建文件夹 (正在跟进处理中)~~
 - 🔴 若要使用modelscope， 则需要该模型或数据集在huggingface中存在，否则无法解析。(modelscope缺少高效简洁的仓库元信息API接口，如确有需要的欢迎PR)
 - ❗ 对于仓库内的单文件，则直接输入你手动获取的链接即可, 本插件不对单文件进行任何解析。
+- 🤷‍♂️ 解析用时与目录深度和文件数量有关，通常在3s内可以完成大部分解析。
 
 ### Example
 
@@ -41,19 +50,24 @@ tips: 以上两个链接中`models/`可以省略
 tips: 以上两个链接中`datasets/`绝对不能省略
 
 ## Demo
-
+<!-- markdownlint-disable MD033 -->
 1. Input `https://hf-mirror.com/models/unsloth/DeepSeek-R1-GGUF/tree/main`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF.png" alt="unsloth-DeepSeek-R1-GGUF" width="800">
+    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF.png" alt="unsloth-DeepSeek-R1-GGUF" width="800">
 
 2. Input `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main/DeepSeek-R1-BF16`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF-BF16.png" alt="unsloth-DeepSeek-R1-GGUF-BF16" width="800">
+    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF-BF16.png" alt="unsloth-DeepSeek-R1-GGUF-BF16" width="800">
 
 3. Input `https://hf-mirror.com/datasets/rubenroy/GammaCorpus-CoT-Math-170k/tree/main`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-rubenroy-cot.png" alt="datasets-rubenroy-cot" width="800">
+    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-rubenroy-cot.png" alt="datasets-rubenroy-cot" width="800">
 
 4. Input `https://hf-mirror.com/datasets/ServiceNow-AI/R1-Distill-SFT/tree/main/v1`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-servicenow-r1sft-v1.png" alt="datasets-servicenow-r1sft-v1" width="800">
+    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-servicenow-r1sft-v1.png" alt="datasets-servicenow-r1sft-v1" width="800">
+
+5. Input `https://huggingface.co/KwaiVGI/LivePortrait/tree/main`
+
+    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/dir-more-than-two-KwaiVGI-LivePortrait.png" alt="KwaiVGI-LivePortrait" width="800">
+<!-- markdownlint-disable MD033 --> 
