@@ -1,13 +1,15 @@
 gopeed.events.onResolve(async function (ctx) {
   /**
    * 获取模型元数据 || Get Model Metadata
-   * @param {string} path
-   * @returns {Promise<{name: string, files: {name: string, size: number, path: string?; req: {url: string}}[] | undefined}>}
+   * @param {string} basePath - 基础路径. e.g. tree/main
+   * @param {string} filepath - 文件路径. e.g. models/unsloth/DeepSeek-R1-GGUF
+   * @returns {Promise<import('@gopeed/types').FileInfo[]>}
    */
-  async function getMetaData(path) {
+  async function getMetaData(basePath, filepath) {
+    const path = filepath ? `${basePath}/${filepath}` : basePath;
     // hf-mirror或huggingface.co
     const apiPath = `https://hf-mirror.com/api/${path}`;
-    gopeed.logger.debug('apiPath:', apiPath);
+    gopeed.logger.debug('apiPath:', apiPath, 'path:', path);
     const resp = await fetch(apiPath, {
       headers: { Accept: 'application/json' },
     });
@@ -16,7 +18,7 @@ gopeed.events.onResolve(async function (ctx) {
     /* eslint-disable no-undef */
     const result = await Promise.all(
       data.map(async (item) => {
-        if (item.type === 'directory') return await getMetaData(`${path}/${item.path}`);
+        if (item.type === 'directory') return await getMetaData(basePath, item.path);
         return item;
       })
     );
@@ -25,11 +27,11 @@ gopeed.events.onResolve(async function (ctx) {
   /** 整理文件列表
    * @param {string} path
    * @param {string} branch
-   * @param {any} data
+   * @param {import('@gopeed/types').FileInfo[]} data
    * @param {string} protocol
    * @param {string} baseUrl
    * @param {string} port
-   * @returns {{ name: string, path: string, size: string, req: {url: string}[]}}
+   * @returns {import('@gopeed/types').FileInfo[]}
    * */
   function walkFiles(data, branch, path, protocol, baseUrl, port, repo) {
     if (data === undefined || data === null) {
