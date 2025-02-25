@@ -2,7 +2,7 @@ gopeed.events.onResolve(async function (ctx) {
   /**
    * 获取模型元数据 || Get Model Metadata
    * @param {string} basePath - 基础路径. e.g. tree/main
-   * @param {string} filepath - 文件路径. e.g. models/unsloth/DeepSeek-R1-GGUF
+   * @param {string} filepath - 文件路径. e.g. insightface/models/buffalo_l
    * @returns {Promise<import('@gopeed/types').FileInfo[]>}
    */
   async function getMetaData(basePath, filepath) {
