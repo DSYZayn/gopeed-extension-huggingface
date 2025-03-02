@@ -71,3 +71,7 @@ tips: 以上两个链接中`datasets/`绝对不能省略
 
     <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/dir-more-than-two-KwaiVGI-LivePortrait.png" alt="KwaiVGI-LivePortrait" width="800">
 <!-- markdownlint-disable MD033 --> 
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=DSYZayn/gopeed-extension-huggingface&type=Date)](https://star-history.com/#DSYZayn/gopeed-extension-huggingface&Date)
