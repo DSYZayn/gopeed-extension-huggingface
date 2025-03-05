@@ -18,5 +18,12 @@
       "entry": "dist/index.js"
     }
   ],
-  "settings": []
+  "settings": [
+    {
+      "name": "cookie",
+      "title": "Huggingface Cookie",
+      "description": "Some Huggingface models require login to download, you can paste your cookie here",
+      "type": "string"
+    }
+  ]
 }
