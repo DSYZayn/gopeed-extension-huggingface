@@ -40,7 +40,7 @@ gopeed.events.onResolve(async function (ctx) {
       return [];
     }
     gopeed.logger.debug('walkFiles: data is not undefined or null');
-    const files_list = data.map((item) => {
+    return data.map((item) => {
       gopeed.logger.debug('item.path:', item.path);
       let a_path = path.replace('tree', 'resolve').replace('main', `${branch}`);
       if (branch == 'main' && path.includes('models')) {
@@ -66,10 +66,14 @@ gopeed.events.onResolve(async function (ctx) {
         size: item.size,
         req: {
           url: `${protocol}//${baseUrl}:${port}/${a_path}${b_path}/${name}`,
+          extra: {
+            header: {
+              Cookie: gopeed.settings.cookie,
+            },
+          },
         },
       };
     });
-    return files_list;
   }
 
   try {
