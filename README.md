@@ -38,7 +38,7 @@
 
 ### Cookie Configuration
 
-部分模型需要登录才能下载，这种情况下需要配置cookie，否则会出现`401`下载失败，配置方法如下：
+部分模型需要登录才能下载(Gated Repo)，这种情况下需要配置cookie，否则会出现`401`下载失败，配置方法如下：
 
 1. 获取cookie，打开浏览器，登录`huggingface.co`，按`F12`打开开发者工具，切换到`Network`选项卡，刷新页面，找到`https://huggingface.co`的请求，复制`Cookie`字段的值
    ![](assets/get-cookie.png)
@@ -82,9 +82,9 @@ tips: 以上两个链接中`datasets/`绝对不能省略
 
 5.  Input `https://huggingface.co/KwaiVGI/LivePortrait/tree/main`
 
-        <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/dir-more-than-two-KwaiVGI-LivePortrait.png" alt="KwaiVGI-LivePortrait" width="800">
+<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/dir-more-than-two-KwaiVGI-LivePortrait.png" alt="KwaiVGI-LivePortrait" width="800">
 
-    <!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD033 -->
 
 ## Star History
 
