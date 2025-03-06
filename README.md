@@ -4,9 +4,10 @@
  * @LastEditors: zayn 1546492103@qq.com
  * @LastEditTime: 2025-02-25 12:13:36
  * @FilePath: \gopeed-extension-huggingface\README.md
- * @Description: 
- * 
+ * @Description:
+ *
 -->
+
 # Gopeed Extension Huggingface
 
 ## Feature
@@ -35,6 +36,16 @@
 - ❗ 对于仓库内的单文件，则直接输入你手动获取的链接即可, 本插件不对单文件进行任何解析。
 - 🤷‍♂️ 解析用时与目录深度和文件数量有关，通常在3s内可以完成大部分解析。
 
+### Cookie Configuration
+
+部分模型需要登录才能下载，这种情况下需要配置cookie，否则会出现`401`下载失败，配置方法如下：
+
+1. 获取cookie，打开浏览器，登录`huggingface.co`，按`F12`打开开发者工具，切换到`Network`选项卡，刷新页面，找到`https://huggingface.co`的请求，复制`Cookie`字段的值
+   ![](assets/get-cookie.png)
+
+2. 在扩展设置中填入cookie
+   ![alt text](assets/set-cookie.png)
+
 ### Example
 
 > 使用hf-mirror或modelscope下载则替换 `huggingface.co` 为 `hf-mirror.com` 或 `www.modelscope.cn`, 参考 `baseUrl`
@@ -50,27 +61,30 @@ tips: 以上两个链接中`models/`可以省略
 tips: 以上两个链接中`datasets/`绝对不能省略
 
 ## Demo
+
 <!-- markdownlint-disable MD033 -->
-1. Input `https://hf-mirror.com/models/unsloth/DeepSeek-R1-GGUF/tree/main`
 
-    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF.png" alt="unsloth-DeepSeek-R1-GGUF" width="800">
+1.  Input `https://hf-mirror.com/models/unsloth/DeepSeek-R1-GGUF/tree/main`
 
-2. Input `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main/DeepSeek-R1-BF16`
+<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF.png" alt="unsloth-DeepSeek-R1-GGUF" width="800">
 
-    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF-BF16.png" alt="unsloth-DeepSeek-R1-GGUF-BF16" width="800">
+2.  Input `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main/DeepSeek-R1-BF16`
 
-3. Input `https://hf-mirror.com/datasets/rubenroy/GammaCorpus-CoT-Math-170k/tree/main`
+<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF-BF16.png" alt="unsloth-DeepSeek-R1-GGUF-BF16" width="800">
 
-    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-rubenroy-cot.png" alt="datasets-rubenroy-cot" width="800">
+3.  Input `https://hf-mirror.com/datasets/rubenroy/GammaCorpus-CoT-Math-170k/tree/main`
 
-4. Input `https://hf-mirror.com/datasets/ServiceNow-AI/R1-Distill-SFT/tree/main/v1`
+<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-rubenroy-cot.png" alt="datasets-rubenroy-cot" width="800">
 
-    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-servicenow-r1sft-v1.png" alt="datasets-servicenow-r1sft-v1" width="800">
+4.  Input `https://hf-mirror.com/datasets/ServiceNow-AI/R1-Distill-SFT/tree/main/v1`
 
-5. Input `https://huggingface.co/KwaiVGI/LivePortrait/tree/main`
+<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-servicenow-r1sft-v1.png" alt="datasets-servicenow-r1sft-v1" width="800">
 
-    <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/dir-more-than-two-KwaiVGI-LivePortrait.png" alt="KwaiVGI-LivePortrait" width="800">
-<!-- markdownlint-disable MD033 --> 
+5.  Input `https://huggingface.co/KwaiVGI/LivePortrait/tree/main`
+
+        <img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/dir-more-than-two-KwaiVGI-LivePortrait.png" alt="KwaiVGI-LivePortrait" width="800">
+
+    <!-- markdownlint-disable MD033 -->
 
 ## Star History
 
