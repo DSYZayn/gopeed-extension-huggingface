@@ -14,7 +14,8 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "camelcase": "error"
   },
   "env": {
     "browser": true,
