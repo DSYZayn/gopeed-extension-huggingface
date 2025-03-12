@@ -2,7 +2,7 @@
  * @Author: zayn dongsy2003@163.com
  * @Date: 2025-02-04 02:34:49
  * @LastEditors: zayn dongsy2003@163.com
- * @LastEditTime: 2025-03-12 12:39:25
+ * @LastEditTime: 2025-03-12 13:43:56
  * @FilePath: \gopeed-extension-huggingface\src\index.js
  * @Description: 入口文件
  */
