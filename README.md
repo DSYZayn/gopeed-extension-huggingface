@@ -10,56 +10,58 @@
 
 # Gopeed Extension Huggingface
 
-## Feature
+[简体中文](readme/README.zh-CN.md) | [繁体中文](readme/README.zh-TW.md) | [English](README.md)
 
-- ✅ 支持Huggingface的模型和数据集整个文件夹解析
-- ✅ 支持解析huggingface.co || hf-mirror.com || www.modelscope.cn 上同名的模型和数据集, 并自由指定源站
-- ✅ 支持递归解析，并自动创建文件夹
-- ✅ 支持设置Cookie以便下载Gated Repo
+## Features
+
+- ✅ Supports parsing entire folders of Huggingface models and datasets
+- ✅ Supports parsing models and datasets with the same name on huggingface.co || hf-mirror.com || www.modelscope.cn, and freely specifying the source station
+- ✅ Supports recursive parsing and automatically creates folders
+- ✅ Supports setting Cookie to download Gated Repo
 - ...
 
 ## Installation
 
-在插件页面输入`https://github.com/DSYZayn/gopeed-extension-huggingface.git`下载即可安装
+Enter `https://github.com/DSYZayn/gopeed-extension-huggingface.git` on the plugin page to download and install
 
 ## Usage
 
-满足以下格式的链接即可**解析该文件夹下所有文件**
+Links in the following format can **parse all files in the folder**
 
 `https://<baseUrl>/<user>/<repoType>/<repo>/tree/main/<path>`
 
 - **baseUrl**: huggingface.co || hf-mirror.com || www.modelscope.cn
-- **user**: 用户名(组织名), 如deepseek-ai
+- **user**: username (organization name), e.g., deepseek-ai
 - **repoType**: models || datasets
-- **path**: 文件夹路径， 如果是根目录则不填, 连同`main/`最后的`/`一起去掉
+- **path**: folder path, leave blank if it is the root directory, remove the `/` at the end of `main/`
 
-- 🔴 若要使用modelscope， 则需要该模型或数据集在huggingface中存在，否则无法解析。(modelscope缺少高效简洁的仓库元信息API接口，如确有需要的欢迎PR)
-- ❗ 对于仓库内的单文件，则直接输入你手动获取的链接即可, 本插件不对单文件进行任何解析。
-- 🤷‍♂️ 解析用时与目录深度和文件数量有关，通常在3s内可以完成大部分解析。
+- 🔴 If using modelscope, the model or dataset must exist on huggingface, otherwise it cannot be parsed. (modelscope lacks an efficient and concise repository metadata API interface, welcome PR if needed)
+- ❗ For individual files within a repository, enter the link you manually obtained, this plugin does not parse individual files.
+- 🤷‍♂️ Parsing time depends on the depth of the directory and the number of files, typically completing most parsing within 3 seconds.
 
 ### Cookie Configuration
 
-部分模型需要登录才能下载(Gated Repo)，这种情况下需要配置cookie，否则会出现`401`下载失败，配置方法如下：
+Some models require login to download (Gated Repo), in which case you need to configure the cookie, otherwise a `401` download failure will occur. The configuration method is as follows:
 
-1. 获取cookie，打开浏览器，登录`huggingface.co`，按`F12`打开开发者工具，切换到`Network`选项卡，刷新页面，找到`https://huggingface.co`的请求，复制`Cookie`字段的值
+1. Get the cookie, open the browser, log in to `huggingface.co`, press `F12` to open the developer tools, switch to the `Network` tab, refresh the page, find the `https://huggingface.co` request, copy the value of the `Cookie` field
    ![](assets/get-cookie.png)
 
-2. 在扩展设置中填入cookie
+2. Enter the cookie in the extension settings
    ![alt text](assets/set-cookie.png)
 
 ### Example
 
-> 使用hf-mirror或modelscope下载则替换 `huggingface.co` 为 `hf-mirror.com` 或 `www.modelscope.cn`, 参考 `baseUrl`
+> To download using hf-mirror or modelscope, replace `huggingface.co` with `hf-mirror.com` or `www.modelscope.cn`, refer to `baseUrl`
 
-1. 下载unsloth/DeepSeek-R1-GGUF的根目录文件：`https://huggingface.co/models/unsloth/DeepSeek-R1-GGUF/tree/main`
-2. 下载unsloth/DeepSeek-R1-GGUF的`Deepseek-R1-BF16`文件夹：`https://huggingface.co/models/unsloth/DeepSeek-R1-GGUF/tree/main/Deepseek-R1-BF16`
+1. Download the root folder files of unsloth/DeepSeek-R1-GGUF: `https://huggingface.co/models/unsloth/DeepSeek-R1-GGUF/tree/main`
+2. Download the Deepseek-R1-BF16 folder of unsloth/DeepSeek-R1-GGUF: `https://huggingface.co/models/unsloth/DeepSeek-R1-GGUF/tree/main/Deepseek-R1-BF16`
 
-tips: 以上两个链接中`models/`可以省略
+tip: The `models/` in the above two links can be omitted
 
-1. 下载open-thoughts/OpenThoughts-114k的根目录文件：`https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k/tree/main`
-2. 下载open-thoughts/OpenThoughts-114k的`data`文件夹：`https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k/tree/main/data`
+1. Download the root folder files of open-thoughts/OpenThoughts-114k: `https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k/tree/main`
+2. Download the data folder of open-thoughts/OpenThoughts-114k: `https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k/tree/main/data`
 
-tips: 以上两个链接中`datasets/`绝对不能省略
+tip: The `datasets/` in the above two links must not be omitted
 
 ## Demo
 
