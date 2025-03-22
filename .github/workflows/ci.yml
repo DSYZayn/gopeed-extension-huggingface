@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull_request:
+    branches: 
+        - '**/*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v3
+
+    - name: 设置Node.js环境
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: 安装依赖
+      run: npm install
+
+    - name: 运行测试
+      run: npm test
