@@ -6,7 +6,10 @@
       "path": "gopeed-extension-huggingface/mock-repo/models/model1",
       "size": 265,
       "req": {
-        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model1/__init__.py"
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model1/__init__.py",
+        "extra": {
+          "header": {}
+        }
       }
     },
     {
@@ -14,7 +17,10 @@
       "path": "gopeed-extension-huggingface/mock-repo/models/model1",
       "size": 414,
       "req": {
-        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model1/model1.py"
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model1/model1.py",
+        "extra": {
+          "header": {}
+        }
       }
     },
     {
@@ -22,7 +28,10 @@
       "path": "gopeed-extension-huggingface/mock-repo/models/model1",
       "size": 111,
       "req": {
-        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model1/model1_config.json"
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model1/model1_config.json",
+        "extra": {
+          "header": {}
+        }
       }
     },
     {
@@ -30,7 +39,10 @@
       "path": "gopeed-extension-huggingface/mock-repo/models/model2",
       "size": 265,
       "req": {
-        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model2/__init__.py"
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model2/__init__.py",
+        "extra": {
+          "header": {}
+        }
       }
     },
     {
@@ -38,7 +50,10 @@
       "path": "gopeed-extension-huggingface/mock-repo/models/model2",
       "size": 414,
       "req": {
-        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model2/model2.py"
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model2/model2.py",
+        "extra": {
+          "header": {}
+        }
       }
     },
     {
@@ -46,7 +61,10 @@
       "path": "gopeed-extension-huggingface/mock-repo/models/model2",
       "size": 117,
       "req": {
-        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model2/model2_config.json"
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model2/model2_config.json",
+        "extra": {
+          "header": {}
+        }
       }
     }
   ]

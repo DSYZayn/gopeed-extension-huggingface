@@ -6,7 +6,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "test": "node --experimental-vm-modules --trace-warnings node_modules/jest/bin/jest.js",
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production"
   },

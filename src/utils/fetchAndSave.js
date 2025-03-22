@@ -13,6 +13,15 @@ import getMetaData from '../api/getMetaData.js';
 import walkFiles from '../api/walkFiles.js';
 import fs from 'fs';
 
+/* eslint-disable no-undef */
+global.gopeed = {
+  logger: {
+    debug: () => {},
+  },
+  settings: {
+    cookie: undefined,
+  },
+};
 async function fetchAndSave(url, outputPath) {
   try {
     let urlObj = new URL(url);
