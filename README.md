@@ -13,7 +13,7 @@
 ## Feature
 
 - ✅ 支持Huggingface的模型和数据集整个文件夹解析
-- ✅ 支持解析huggingface.co || hf-mirror.com || www.modelscope.cn 上同名的模型和数据集, 并自由指定源站
+- ✅ 支持解析huggingface.co || <alpha.>hf-mirror.com || www.modelscope.cn 上同名的模型和数据集, 并自由指定源站
 - ✅ 支持递归解析，并自动创建文件夹
 - ✅ 支持设置Cookie以便下载Gated Repo
 - ...
