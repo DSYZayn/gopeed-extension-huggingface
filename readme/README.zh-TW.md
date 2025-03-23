@@ -15,7 +15,7 @@
 ## 功能
 
 - ✅ 支援Huggingface的模型和數據集整個資料夾解析
-- ✅ 支援解析huggingface.co || hf-mirror.com || www.modelscope.cn 上同名的模型和數據集, 並自由指定來源站
+- ✅ 支援解析huggingface.co || <alpha.>hf-mirror.com || www.modelscope.cn 上同名的模型和數據集, 並自由指定來源站
 - ✅ 支援遞歸解析，並自動建立資料夾
 - ✅ 支援設定Cookie以便下載Gated Repo
 - ...
@@ -44,10 +44,10 @@
 部分模型需要登入才能下載(Gated Repo)，這種情況下需要設定cookie，否則會出現`401`下載失敗，設定方法如下：
 
 1. 獲取cookie，打開瀏覽器，登入`huggingface.co`，按`F12`打開開發者工具，切換到`Network`選項卡，重新整理頁面，找到`https://huggingface.co`的請求，複製`Cookie`欄位的值
-   ![](assets/get-cookie.png)
+   ![get-cookie](../assets/get-cookie.png)
 
 2. 在擴充功能設定中填入cookie
-   ![alt text](assets/set-cookie.png)
+   ![set-cookie](../assets/set-cookie.png)
 
 ### 範例
 
@@ -69,23 +69,23 @@
 
 1.  Input `https://hf-mirror.com/models/unsloth/DeepSeek-R1-GGUF/tree/main`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF.png" alt="unsloth-DeepSeek-R1-GGUF" width="800">
+![unsloth-DeepSeek-R1-GGUF](../assets/unsloth-DeepSeek-R1-GGUF.png)
 
 2.  Input `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main/DeepSeek-R1-BF16`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF-BF16.png" alt="unsloth-DeepSeek-R1-GGUF-BF16" width="800">
+![unsloth-DeepSeek-R1-GGUF-BF16](../assets/unsloth-DeepSeek-R1-GGUF-BF16.png)
 
 3.  Input `https://hf-mirror.com/datasets/rubenroy/GammaCorpus-CoT-Math-170k/tree/main`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-rubenroy-cot.png" alt="datasets-rubenroy-cot" width="800">
+![datasets-rubenroy-cot](../assets/datasets-rubenroy-cot.png)
 
 4.  Input `https://hf-mirror.com/datasets/ServiceNow-AI/R1-Distill-SFT/tree/main/v1`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-servicenow-r1sft-v1.png" alt="datasets-servicenow-r1sft-v1" width="800">
+![datasets-servicenow-r1sft-v1](../assets/datasets-servicenow-r1sft-v1.png)
 
 5.  Input `https://huggingface.co/KwaiVGI/LivePortrait/tree/main`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/dir-more-than-two-KwaiVGI-LivePortrait.png" alt="KwaiVGI-LivePortrait" width="800">
+![KwaiVGI-LivePortrait](../assets/KwaiVGI-LivePortrait.png)
 
 <!-- markdownlint-disable MD033 -->
 
