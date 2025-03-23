@@ -44,10 +44,10 @@ Links in the following format can **parse all files in the folder**
 Some models require login to download (Gated Repo), in which case you need to configure the cookie, otherwise a `401` download failure will occur. The configuration method is as follows:
 
 1. Get the cookie, open the browser, log in to `huggingface.co`, press `F12` to open the developer tools, switch to the `Network` tab, refresh the page, find the `https://huggingface.co` request, copy the value of the `Cookie` field
-   ![](assets/get-cookie.png)
+   ![get-cookie](assets/get-cookie.png)
 
 2. Enter the cookie in the extension settings
-   ![alt text](assets/set-cookie.png)
+   ![set-cookie](assets/set-cookie.png)
 
 ### Example
 
@@ -69,23 +69,23 @@ tip: The `datasets/` in the above two links must not be omitted
 
 1.  Input `https://hf-mirror.com/models/unsloth/DeepSeek-R1-GGUF/tree/main`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF.png" alt="unsloth-DeepSeek-R1-GGUF" width="800">
+![unsloth-DeepSeek-R1-GGUF](assets/unsloth-DeepSeek-R1-GGUF.png)
 
 2.  Input `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main/DeepSeek-R1-BF16`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/unsloth-DeepSeek-R1-GGUF-BF16.png" alt="unsloth-DeepSeek-R1-GGUF-BF16" width="800">
+![unsloth-DeepSeek-R1-GGUF-BF16](assets/unsloth-DeepSeek-R1-GGUF-BF16.png)
 
 3.  Input `https://hf-mirror.com/datasets/rubenroy/GammaCorpus-CoT-Math-170k/tree/main`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-rubenroy-cot.png" alt="datasets-rubenroy-cot" width="800">
+![datasets-rubenroy-cot](assets/datasets-rubenroy-cot.png)
 
 4.  Input `https://hf-mirror.com/datasets/ServiceNow-AI/R1-Distill-SFT/tree/main/v1`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/datasets-servicenow-r1sft-v1.png" alt="datasets-servicenow-r1sft-v1" width="800">
+![datasets-servicenow-r1sft-v1](assets/datasets-servicenow-r1sft-v1.png)
 
 5.  Input `https://huggingface.co/KwaiVGI/LivePortrait/tree/main`
 
-<img src="https://github.com/DSYZayn/gopeed-extension-huggingface/blob/main/assets/dir-more-than-two-KwaiVGI-LivePortrait.png" alt="KwaiVGI-LivePortrait" width="800">
+![KwaiVGI-LivePortrait](assets/KwaiVGI-LivePortrait.png)
 
 <!-- markdownlint-disable MD033 -->
 
