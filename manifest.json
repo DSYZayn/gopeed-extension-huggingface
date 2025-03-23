@@ -4,7 +4,7 @@
   "title": "Huggingface下载",
   "description": "支持Huggingface模型、数据集的文件夹解析下载, 可自由替换 Huggingface下载地址\n使用方法请看主页",
   "icon": "./assets/icon.png",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "homepage": "https://github.com/DSYZayn/gopeed-extension-huggingface",
   "repository": {
     "url": "https://github.com/DSYZayn/gopeed-extension-huggingface"
