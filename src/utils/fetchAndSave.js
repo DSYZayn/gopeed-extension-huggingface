@@ -48,8 +48,13 @@ const links = [
   'https://huggingface.co/zaynchen/gopeed-extension-huggingface/tree/main',
   'https://huggingface.co/zaynchen/gopeed-extension-huggingface/tree/main/mock-repo',
   'https://huggingface.co/zaynchen/gopeed-extension-huggingface/tree/main/mock-repo/models',
+  'https://hf-mirror.com/zaynchen/gopeed-extension-huggingface/tree/main',
+  'https://hf-mirror.com/zaynchen/gopeed-extension-huggingface/tree/main/mock-repo',
+  'https://hf-mirror.com/zaynchen/gopeed-extension-huggingface/tree/main/mock-repo/models',
+  'https://alpha.hf-mirror.com/zaynchen/gopeed-extension-huggingface/tree/main',
+  'https://alpha.hf-mirror.com/zaynchen/gopeed-extension-huggingface/tree/main/mock-repo',
+  'https://alpha.hf-mirror.com/zaynchen/gopeed-extension-huggingface/tree/main/mock-repo/models',
 ];
-
 links.forEach((link, index) => {
   const outputPath = `assets/result_${index + 1}.json`;
   fetchAndSave(link, outputPath);
