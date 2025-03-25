@@ -1,0 +1,71 @@
+{
+  "name": "zaynchen",
+  "files": [
+    {
+      "name": "__init__.py",
+      "path": "gopeed-extension-huggingface/mock-repo/models/model1",
+      "size": 265,
+      "req": {
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model1/__init__.py",
+        "extra": {
+          "header": {}
+        }
+      }
+    },
+    {
+      "name": "model1.py",
+      "path": "gopeed-extension-huggingface/mock-repo/models/model1",
+      "size": 414,
+      "req": {
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model1/model1.py",
+        "extra": {
+          "header": {}
+        }
+      }
+    },
+    {
+      "name": "model1_config.json",
+      "path": "gopeed-extension-huggingface/mock-repo/models/model1",
+      "size": 111,
+      "req": {
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model1/model1_config.json",
+        "extra": {
+          "header": {}
+        }
+      }
+    },
+    {
+      "name": "__init__.py",
+      "path": "gopeed-extension-huggingface/mock-repo/models/model2",
+      "size": 265,
+      "req": {
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model2/__init__.py",
+        "extra": {
+          "header": {}
+        }
+      }
+    },
+    {
+      "name": "model2.py",
+      "path": "gopeed-extension-huggingface/mock-repo/models/model2",
+      "size": 414,
+      "req": {
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model2/model2.py",
+        "extra": {
+          "header": {}
+        }
+      }
+    },
+    {
+      "name": "model2_config.json",
+      "path": "gopeed-extension-huggingface/mock-repo/models/model2",
+      "size": 117,
+      "req": {
+        "url": "https://huggingface.co:443/zaynchen/gopeed-extension-huggingface/resolve/main/mock-repo/models/model2/model2_config.json",
+        "extra": {
+          "header": {}
+        }
+      }
+    }
+  ]
+}

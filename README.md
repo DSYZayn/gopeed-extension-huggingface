@@ -15,7 +15,7 @@
 ## Features
 
 - ✅ Supports parsing entire folders of Huggingface models and datasets
-- ✅ Supports parsing models and datasets with the same name on huggingface.co || hf-mirror.com || www.modelscope.cn, and freely specifying the source station
+- ✅ Supports parsing models and datasets with the same name on huggingface.co || <alpha.>hf-mirror.com || www.modelscope.cn, and freely specifying the source station
 - ✅ Supports recursive parsing and automatically creates folders
 - ✅ Supports setting Cookie to download Gated Repo
 - ...
