@@ -72,8 +72,8 @@ async function getMetaDataInternal(basePath, filepath, depth = 0, maxDepth = 10)
       return item;
     });
 
-    // Flatten nested arrays with depth limited by maxDepth
-    return result.flat(maxDepth);
+    // Flatten all nested arrays from recursive calls (safe due to depth limit)
+    return result.flat(Infinity);
   } catch (error) {
     gopeed.logger.error(`Error fetching metadata for ${apiPath}:`, error.message);
     throw error;
