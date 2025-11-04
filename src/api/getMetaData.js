@@ -7,18 +7,18 @@
  */
 async function limitConcurrency(items, limit, handler) {
   const results = [];
-  const executing = [];
+  const executing = new Set();
 
   for (const item of items) {
     const promise = handler(item).then((result) => {
-      executing.splice(executing.indexOf(promise), 1);
+      executing.delete(promise);
       return result;
     });
 
     results.push(promise);
-    executing.push(promise);
+    executing.add(promise);
 
-    if (executing.length >= limit) {
+    if (executing.size >= limit) {
       await Promise.race(executing);
     }
   }
@@ -63,7 +63,8 @@ async function getMetaDataInternal(basePath, filepath, depth = 0, maxDepth = 10)
       return item;
     });
 
-    return result.flat(Infinity);
+    // Flatten with explicit depth based on maxDepth to avoid potential issues
+    return result.flat(maxDepth);
   } catch (error) {
     gopeed.logger.error(`Error fetching metadata for ${apiPath}:`, error.message);
     throw error;
