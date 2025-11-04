@@ -10,10 +10,19 @@ async function limitConcurrency(items, limit, handler) {
   const executing = new Set();
 
   for (const item of items) {
-    const promise = Promise.resolve(handler(item)).then((result) => {
-      executing.delete(promise);
-      return result;
-    });
+    // Create the base promise first
+    const basePromise = handler(item);
+
+    // Wrap it with cleanup logic
+    const promise = basePromise
+      .then((result) => {
+        executing.delete(promise);
+        return result;
+      })
+      .catch((error) => {
+        executing.delete(promise);
+        throw error;
+      });
 
     results.push(promise);
     executing.add(promise);
@@ -63,8 +72,8 @@ async function getMetaDataInternal(basePath, filepath, depth = 0, maxDepth = 10)
       return item;
     });
 
-    // Flatten all nested arrays from recursive calls
-    return result.flat(Infinity);
+    // Flatten nested arrays with depth limited by maxDepth
+    return result.flat(maxDepth);
   } catch (error) {
     gopeed.logger.error(`Error fetching metadata for ${apiPath}:`, error.message);
     throw error;
