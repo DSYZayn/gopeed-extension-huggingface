@@ -10,7 +10,7 @@ async function limitConcurrency(items, limit, handler) {
   const executing = new Set();
 
   for (const item of items) {
-    const promise = handler(item).then((result) => {
+    const promise = Promise.resolve(handler(item)).then((result) => {
       executing.delete(promise);
       return result;
     });
@@ -63,8 +63,8 @@ async function getMetaDataInternal(basePath, filepath, depth = 0, maxDepth = 10)
       return item;
     });
 
-    // Flatten with explicit depth based on maxDepth to avoid potential issues
-    return result.flat(maxDepth);
+    // Flatten all nested arrays from recursive calls
+    return result.flat(Infinity);
   } catch (error) {
     gopeed.logger.error(`Error fetching metadata for ${apiPath}:`, error.message);
     throw error;
