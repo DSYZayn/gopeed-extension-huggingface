@@ -38,6 +38,7 @@ Links in the following format can **parse all files in the folder**
 - 🔴 If using modelscope, the model or dataset must exist on huggingface, otherwise it cannot be parsed. (modelscope lacks an efficient and concise repository metadata API interface, welcome PR if needed)
 - ❗ For individual files within a repository, enter the link you manually obtained, this plugin does not parse individual files.
 - 🤷‍♂️ Parsing time depends on the depth of the directory and the number of files, typically completing most parsing within 3 seconds.
+- ℹ️ To prevent timeouts on extremely deep repositories, the parser limits directory recursion to a maximum depth of 10 levels and processes at most 5 subdirectories concurrently.
 
 ### Cookie Configuration
 
