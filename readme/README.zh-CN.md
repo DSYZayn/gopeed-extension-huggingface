@@ -15,9 +15,10 @@
 ## 特性
 
 - ✅ 支持Huggingface的模型和数据集整个文件夹解析
-- ✅ 支持解析huggingface.co || <alpha.>hf-mirror.com || www.modelscope.cn 上同名的模型和数据集, 并自由指定源站
+- ✅ 支持解析huggingface.co || <alpha.|cdn.>hf-mirror.com || www.modelscope.cn 上同名的模型和数据集, 并自由指定源站
 - ✅ 支持递归解析，并自动创建文件夹
 - ✅ 支持设置Cookie以便下载Gated Repo
+- ✅ 支持用户自定义兼容hf-mirror的端点
 - ...
 
 ## 安装
@@ -30,7 +31,7 @@
 
 `https://<baseUrl>/<user>/<repoType>/<repo>/tree/main/<path>`
 
-- **baseUrl**: huggingface.co || hf-mirror.com || www.modelscope.cn
+- **baseUrl**: huggingface.co || hf-mirror.com || cdn.hf-mirror.com || alpha.hf-mirror.com || www.modelscope.cn || 自定义端点
 - **user**: 用户名(组织名), 如deepseek-ai
 - **repoType**: models || datasets
 - **path**: 文件夹路径， 如果是根目录则不填, 连同`main/`最后的`/`一起去掉
@@ -38,6 +39,14 @@
 - 🔴 若要使用modelscope， 则需要该模型或数据集在huggingface中存在，否则无法解析。(modelscope缺少高效简洁的仓库元信息API接口，如确有需要的欢迎PR)
 - ❗ 对于仓库内的单文件，则直接输入你手动获取的链接即可, 本插件不对单文件进行任何解析。
 - 🤷‍♂️ 解析用时与目录深度和文件数量有关，通常在3s内可以完成大部分解析。
+
+### 自定义端点
+
+如果你使用私有或第三方兼容hf-mirror的端点，可以在插件设置中添加，插件会自动识别并解析来自该域名的链接：
+
+1. 打开插件设置，找到 **Custom Endpoints（自定义端点）** 字段。
+2. 输入一个或多个域名，多个域名用分号（`;`）分割，例如：`mymirror.example.com;another.mirror.org`
+3. 保存后，来自这些域名且符合HF树形URL格式的链接将被自动解析。
 
 ### Cookie 设置
 

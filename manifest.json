@@ -13,7 +13,7 @@
     {
       "event": "onResolve",
       "match": {
-        "urls": ["*://huggingface.co/*", "*://hf-mirror.com/*", "*://www.modelscope.cn/*", "*://alpha.hf-mirror.com/*"]
+        "urls": ["*://huggingface.co/*", "*://hf-mirror.com/*", "*://www.modelscope.cn/*", "*://alpha.hf-mirror.com/*", "*://cdn.hf-mirror.com/*", "*://*/*/tree/*"]
       },
       "entry": "dist/index.js"
     }
@@ -23,6 +23,12 @@
       "name": "cookie",
       "title": "Huggingface Cookie",
       "description": "Some Huggingface models require login to download, you can paste your cookie here",
+      "type": "string"
+    },
+    {
+      "name": "customEndpoints",
+      "title": "Custom Endpoints",
+      "description": "Add custom hf-mirror-compatible endpoints to trigger parsing, separate multiple entries with semicolons (;), e.g. mymirror.example.com;another.mirror.org",
       "type": "string"
     }
   ]

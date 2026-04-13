@@ -15,9 +15,10 @@
 ## Features
 
 - ✅ Supports parsing entire folders of Huggingface models and datasets
-- ✅ Supports parsing models and datasets with the same name on huggingface.co || <alpha.>hf-mirror.com || www.modelscope.cn, and freely specifying the source station
+- ✅ Supports parsing models and datasets with the same name on huggingface.co || <alpha.|cdn.>hf-mirror.com || www.modelscope.cn, and freely specifying the source station
 - ✅ Supports recursive parsing and automatically creates folders
 - ✅ Supports setting Cookie to download Gated Repo
+- ✅ Supports user-defined custom hf-mirror-compatible endpoints
 - ...
 
 ## Installation
@@ -30,7 +31,7 @@ Links in the following format can **parse all files in the folder**
 
 `https://<baseUrl>/<user>/<repoType>/<repo>/tree/main/<path>`
 
-- **baseUrl**: huggingface.co || hf-mirror.com || www.modelscope.cn
+- **baseUrl**: huggingface.co || hf-mirror.com || cdn.hf-mirror.com || alpha.hf-mirror.com || www.modelscope.cn || custom endpoints
 - **user**: username (organization name), e.g., deepseek-ai
 - **repoType**: models || datasets
 - **path**: folder path, leave blank if it is the root directory, remove the `/` at the end of `main/`
@@ -38,6 +39,14 @@ Links in the following format can **parse all files in the folder**
 - 🔴 If using modelscope, the model or dataset must exist on huggingface, otherwise it cannot be parsed. (modelscope lacks an efficient and concise repository metadata API interface, welcome PR if needed)
 - ❗ For individual files within a repository, enter the link you manually obtained, this plugin does not parse individual files.
 - 🤷‍♂️ Parsing time depends on the depth of the directory and the number of files, typically completing most parsing within 3 seconds.
+
+### Custom Endpoints
+
+If you use a private or third-party hf-mirror-compatible endpoint, you can add it in the extension settings so the plugin will recognize and parse links from that domain:
+
+1. Open the extension settings and find the **Custom Endpoints** field.
+2. Enter one or more domain names, separated by semicolons (`;`), e.g. `mymirror.example.com;another.mirror.org`
+3. After saving, links from those domains that follow the HF tree URL format will be parsed automatically.
 
 ### Cookie Configuration
 
