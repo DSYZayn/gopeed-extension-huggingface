@@ -11,7 +11,7 @@ import resolveBasePathParts from './api/resolveBasePathParts.js';
 import getMetaData from './api/getMetaData.js';
 import walkFiles from './api/walkFiles.js';
 
-const KNOWN_ENDPOINTS = new Set(['huggingface.co', 'hf-mirror.com', 'www.modelscope.cn']);
+const KNOWN_ENDPOINTS = new Set(['huggingface.co', 'hf-mirror.com', 'alpha.hf-mirror.com', 'www.modelscope.cn']);
 const DEFAULT_REPO_ENDPOINT = 'hf-mirror.com';
 
 function buildEndpointSet() {
