@@ -3,10 +3,11 @@ const DEFAULT_REPO_ENDPOINT = 'hf-mirror.com';
 /**
  * Parse a model: private-protocol URL into a standard https:// URL.
  * Formats:
- *   model:user/repo                   → https://hf-mirror.com/user/repo/tree/main
- *   model:user/repo;hf-mirror.com     → https://hf-mirror.com/user/repo/tree/main
- *   model:datasets/user/repo          → https://hf-mirror.com/datasets/user/repo/tree/main
- *   model:datasets/user/repo;custom   → https://custom/datasets/user/repo/tree/main
+ *   model:user/repo                          → https://hf-mirror.com/user/repo/tree/main
+ *   model:user/repo;hf-mirror.com            → https://hf-mirror.com/user/repo/tree/main
+ *   model:user/repo/folder/sub               → https://hf-mirror.com/user/repo/tree/main/folder/sub
+ *   model:datasets/user/repo                 → https://hf-mirror.com/datasets/user/repo/tree/main
+ *   model:datasets/user/repo/folder;custom   → https://custom/datasets/user/repo/tree/main/folder
  * @param {string} rawUrl
  * @returns {URL}
  */
@@ -24,5 +25,18 @@ export default function parseModelInput(rawUrl) {
     repoPath = content;
     endpoint = DEFAULT_REPO_ENDPOINT;
   }
-  return new URL(`https://${endpoint}/${repoPath}/tree/main`);
+
+  // Split repoPath so that subfolder segments go after tree/main, not before it.
+  // Supported prefixes that consume one extra leading segment: datasets, models, spaces.
+  const segments = repoPath.split('/');
+  const REPO_TYPE_PREFIXES = new Set(['datasets', 'models', 'spaces']);
+  const hasTypePrefix = REPO_TYPE_PREFIXES.has(segments[0]);
+  const prefixOffset = hasTypePrefix ? 1 : 0;
+  const typePrefix = hasTypePrefix ? segments[0] + '/' : '';
+  const user = segments[prefixOffset];
+  const repo = segments[prefixOffset + 1];
+  const folderParts = segments.slice(prefixOffset + 2);
+  const folderSuffix = folderParts.length > 0 ? '/' + folderParts.join('/') : '';
+
+  return new URL(`https://${endpoint}/${typePrefix}${user}/${repo}/tree/main${folderSuffix}`);
 }

@@ -77,6 +77,30 @@ describe('parseModelInput', () => {
     );
   });
 
+  it('places subfolder after tree/main for single-level folder', () => {
+    expect(parseModelInput('model:user/repo/folder').href).toBe(
+      'https://hf-mirror.com/user/repo/tree/main/folder',
+    );
+  });
+
+  it('places subfolder after tree/main for multi-level folder', () => {
+    expect(parseModelInput('model:user/repo/folder/subfolder').href).toBe(
+      'https://hf-mirror.com/user/repo/tree/main/folder/subfolder',
+    );
+  });
+
+  it('places subfolder after tree/main when datasets prefix is used', () => {
+    expect(parseModelInput('model:datasets/user/repo/data').href).toBe(
+      'https://hf-mirror.com/datasets/user/repo/tree/main/data',
+    );
+  });
+
+  it('places subfolder after tree/main when explicit endpoint is given', () => {
+    expect(parseModelInput('model:user/repo/folder;alpha.hf-mirror.com').href).toBe(
+      'https://alpha.hf-mirror.com/user/repo/tree/main/folder',
+    );
+  });
+
   it('falls back to default endpoint when semicolon is present but endpoint is empty', () => {
     expect(parseModelInput('model:user/repo;').href).toBe('https://hf-mirror.com/user/repo/tree/main');
   });
