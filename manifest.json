@@ -35,7 +35,7 @@
       "name": "repoMode",
       "title": "Repo Shorthand Mode",
       "description": "Enable repo: shorthand input. Format: repo:[user/repo]<;endpoint>, e.g. repo:unsloth/DeepSeek-R1-GGUF or repo:datasets/open-thoughts/OpenThoughts-114k;cdn.hf-mirror.com. Default endpoint is hf-mirror.com when none is specified.",
-      "type": "bool"
+      "type": "boolean"
     }
   ]
 }
