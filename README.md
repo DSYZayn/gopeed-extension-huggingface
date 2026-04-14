@@ -19,7 +19,7 @@
 - ✅ Supports recursive parsing and automatically creates folders
 - ✅ Supports setting Cookie to download Gated Repo
 - ✅ Supports user-defined custom hf-mirror-compatible endpoints
-- ✅ Supports `model://` private protocol mode — enter a repo name directly without a full URL
+- ✅ Supports `model:` private protocol mode — enter a repo name directly without a full URL
 - ...
 
 ## Installation
@@ -43,21 +43,21 @@ Links in the following format can **parse all files in the folder**
 
 ### Model Private Protocol Mode
 
-When **仓库私有协议模式 (Model Private Protocol Mode)** is enabled in the extension settings, you can enter a repository name using the `model://` scheme directly instead of a full URL. The plugin intercepts this input and resolves it to file download links on the specified endpoint.
+When **仓库私有协议模式 (Model Private Protocol Mode)** is enabled in the extension settings, you can enter a repository name using the `model:` scheme directly instead of a full URL. The plugin intercepts this input and resolves it to file download links on the specified endpoint.
 
-**Input format:** `model://[user/repo]<;endpoint>`
+**Input format:** `model:[user/repo]<;endpoint>`
 
 | Input | Equivalent URL |
 |---|---|
-| `model://unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
-| `model://unsloth/DeepSeek-R1-GGUF;hf-mirror.com` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
-| `model://datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
-| `model://datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model:unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model:unsloth/DeepSeek-R1-GGUF;hf-mirror.com` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model:datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model:datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
 
 - The default endpoint is `hf-mirror.com` when none is specified.
 - For datasets, prefix the repo path with `datasets/`.
 - The endpoint after `;` can be any supported or custom endpoint.
-- When the mode is **disabled** (default), the `model://` input is ignored and existing URL-based parsing is unaffected.
+- When the mode is **disabled** (default), the `model:` input is ignored and existing URL-based parsing is unaffected.
 
 ### Custom Endpoints
 
