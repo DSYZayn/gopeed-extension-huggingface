@@ -32,7 +32,7 @@
 
 `https://<baseUrl>/<user>/<repoType>/<repo>/tree/main/<path>`
 
-- **baseUrl**: huggingface.co || hf-mirror.com || www.modelscope.cn || 自訂端點
+- **baseUrl**: huggingface.co || hf-mirror.com || alpha.hf-mirror.com || www.modelscope.cn || 自訂端點
 - **user**: 使用者名稱(組織名稱), 如deepseek-ai
 - **repoType**: models || datasets
 - **path**: 資料夾路徑， 如果是根目錄則不填, 連同`main/`最後的`/`一起去掉
@@ -57,7 +57,7 @@
 - 未指定端點時，預設使用 `hf-mirror.com`。
 - 資料集請在倉庫路徑前加 `datasets/`。
 - `;` 後的端點可以是任意受支援或自訂的端點。
-- 該模式**預設關閉**，關閉時 `model:` 輸入將被忽略，不影響原有的URL解析方式。
+- 該模式**預設開啟**，關閉時 `model:` 輸入將被忽略，不影響原有的URL解析方式。
 
 ### 自訂端點
 

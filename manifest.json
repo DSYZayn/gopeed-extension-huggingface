@@ -35,7 +35,8 @@
       "name": "repoMode",
       "title": "仓库私有协议模式",
       "description": "开启后，支持使用 model: 私有协议输入格式。格式：model:[user/repo]<;endpoint>，例如 model:unsloth/DeepSeek-R1-GGUF 或 model:datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com。未指定端点时默认使用 hf-mirror.com。",
-      "type": "bool"
+      "type": "bool",
+      "value": true
     }
   ]
 }

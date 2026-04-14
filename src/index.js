@@ -10,9 +10,9 @@ import prepare from './api/prepare.js';
 import resolveBasePathParts from './api/resolveBasePathParts.js';
 import getMetaData from './api/getMetaData.js';
 import walkFiles from './api/walkFiles.js';
+import parseModelInput from './api/parseModelInput.js';
 
 const KNOWN_ENDPOINTS = new Set(['huggingface.co', 'hf-mirror.com', 'alpha.hf-mirror.com', 'www.modelscope.cn']);
-const DEFAULT_REPO_ENDPOINT = 'hf-mirror.com';
 
 function buildEndpointSet() {
   const custom = gopeed.settings.customEndpoints
@@ -23,33 +23,6 @@ function buildEndpointSet() {
     : [];
   if (custom.length === 0) return KNOWN_ENDPOINTS;
   return new Set([...KNOWN_ENDPOINTS, ...custom]);
-}
-
-/**
- * Parse a model: private-protocol URL into a standard https:// URL.
- * Formats:
- *   model:user/repo                   → https://hf-mirror.com/user/repo/tree/main
- *   model:user/repo;hf-mirror.com     → https://hf-mirror.com/user/repo/tree/main
- *   model:datasets/user/repo          → https://hf-mirror.com/datasets/user/repo/tree/main
- *   model:datasets/user/repo;custom   → https://custom/datasets/user/repo/tree/main
- * @param {string} rawUrl
- * @returns {URL}
- */
-function parseModelInput(rawUrl) {
-  if (!rawUrl.startsWith('model:')) {
-    throw new Error(`[HF Parser] parseModelInput called with invalid input: ${rawUrl}`);
-  }
-  const content = rawUrl.slice('model:'.length).trim();
-  const semicolonIdx = content.indexOf(';');
-  let repoPath, endpoint;
-  if (semicolonIdx !== -1) {
-    repoPath = content.slice(0, semicolonIdx).trim();
-    endpoint = content.slice(semicolonIdx + 1).trim() || DEFAULT_REPO_ENDPOINT;
-  } else {
-    repoPath = content;
-    endpoint = DEFAULT_REPO_ENDPOINT;
-  }
-  return new URL(`https://${endpoint}/${repoPath}/tree/main`);
 }
 
 gopeed.events.onResolve(async function (ctx) {

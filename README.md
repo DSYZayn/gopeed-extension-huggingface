@@ -32,7 +32,7 @@ Links in the following format can **parse all files in the folder**
 
 `https://<baseUrl>/<user>/<repoType>/<repo>/tree/main/<path>`
 
-- **baseUrl**: huggingface.co || hf-mirror.com || www.modelscope.cn || custom endpoints
+- **baseUrl**: huggingface.co || hf-mirror.com || alpha.hf-mirror.com || www.modelscope.cn || custom endpoints
 - **user**: username (organization name), e.g., deepseek-ai
 - **repoType**: models || datasets
 - **path**: folder path, leave blank if it is the root directory, remove the `/` at the end of `main/`
@@ -57,7 +57,7 @@ When **仓库私有协议模式 (Model Private Protocol Mode)** is enabled in th
 - The default endpoint is `hf-mirror.com` when none is specified.
 - For datasets, prefix the repo path with `datasets/`.
 - The endpoint after `;` can be any supported or custom endpoint.
-- When the mode is **disabled** (default), the `model:` input is ignored and existing URL-based parsing is unaffected.
+- When the mode is **enabled** (default), the `model:` input is handled. Disable it to skip `model:` inputs and leave URL-based parsing unaffected.
 
 ### Custom Endpoints
 
