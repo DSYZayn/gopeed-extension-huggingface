@@ -19,7 +19,7 @@
 - ✅ 支援遞歸解析，並自動建立資料夾
 - ✅ 支援設定Cookie以便下載Gated Repo
 - ✅ 支援使用者自訂相容hf-mirror的端點
-- ✅ 支援 `model://` 私有協議模式 —— 直接輸入倉庫名稱，無需完整URL
+- ✅ 支援 `model:` 私有協議模式 —— 直接輸入倉庫名稱，無需完整URL
 - ...
 
 ## 安裝
@@ -43,21 +43,21 @@
 
 ### 倉庫私有協議模式
 
-在插件設定中開啟 **倉庫私有協議模式** 後，可以使用 `model://` 協議格式直接輸入倉庫名稱，插件將接管該輸入並解析為指定端點的檔案下載連結。
+在插件設定中開啟 **倉庫私有協議模式** 後，可以使用 `model:` 協議格式直接輸入倉庫名稱，插件將接管該輸入並解析為指定端點的檔案下載連結。
 
-**輸入格式：** `model://[user/repo]<;endpoint>`
+**輸入格式：** `model:[user/repo]<;endpoint>`
 
 | 輸入 | 等效URL |
 |---|---|
-| `model://unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
-| `model://unsloth/DeepSeek-R1-GGUF;hf-mirror.com` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
-| `model://datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
-| `model://datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model:unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model:unsloth/DeepSeek-R1-GGUF;hf-mirror.com` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model:datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model:datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
 
 - 未指定端點時，預設使用 `hf-mirror.com`。
 - 資料集請在倉庫路徑前加 `datasets/`。
 - `;` 後的端點可以是任意受支援或自訂的端點。
-- 該模式**預設關閉**，關閉時 `model://` 輸入將被忽略，不影響原有的URL解析方式。
+- 該模式**預設關閉**，關閉時 `model:` 輸入將被忽略，不影響原有的URL解析方式。
 
 ### 自訂端點
 

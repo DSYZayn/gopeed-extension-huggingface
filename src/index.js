@@ -26,21 +26,20 @@ function buildEndpointSet() {
 }
 
 /**
- * Parse a model:// private-protocol URL into a standard https:// URL.
+ * Parse a model: private-protocol URL into a standard https:// URL.
  * Formats:
- *   model://user/repo                   → https://hf-mirror.com/user/repo/tree/main
- *   model://user/repo;hf-mirror.com     → https://hf-mirror.com/user/repo/tree/main
- *   model://datasets/user/repo          → https://hf-mirror.com/datasets/user/repo/tree/main
- *   model://datasets/user/repo;custom   → https://custom/datasets/user/repo/tree/main
+ *   model:user/repo                   → https://hf-mirror.com/user/repo/tree/main
+ *   model:user/repo;hf-mirror.com     → https://hf-mirror.com/user/repo/tree/main
+ *   model:datasets/user/repo          → https://hf-mirror.com/datasets/user/repo/tree/main
+ *   model:datasets/user/repo;custom   → https://custom/datasets/user/repo/tree/main
  * @param {string} rawUrl
  * @returns {URL}
  */
 function parseModelInput(rawUrl) {
-  gopeed.logger.debug('[HF Parser] parseModelInput called with:', rawUrl);
-  if (!rawUrl.startsWith('model://')) {
+  if (!rawUrl.startsWith('model:')) {
     throw new Error(`[HF Parser] parseModelInput called with invalid input: ${rawUrl}`);
   }
-  const content = rawUrl.slice('model://'.length).trim();
+  const content = rawUrl.slice('model:'.length).trim();
   const semicolonIdx = content.indexOf(';');
   let repoPath, endpoint;
   if (semicolonIdx !== -1) {
@@ -59,17 +58,17 @@ gopeed.events.onResolve(async function (ctx) {
     let url;
     const endpointSet = buildEndpointSet();
 
-    if (ctx.req.url.startsWith('model://')) {
+    if (ctx.req.url.startsWith('model:')) {
       if (!gopeed.settings.repoMode) {
-        gopeed.logger.debug('[HF Parser] model:// mode disabled, skipping');
+        gopeed.logger.debug('[HF Parser] model: mode disabled, skipping');
         return;
       }
       url = parseModelInput(ctx.req.url);
       if (!endpointSet.has(url.hostname)) {
-        gopeed.logger.error('[HF Parser] model:// endpoint not in allowed list:', url.hostname);
+        gopeed.logger.error('[HF Parser] model: endpoint not in allowed list:', url.hostname);
         return;
       }
-      gopeed.logger.debug('[HF Parser] model:// mode, converted URL:', url.href);
+      gopeed.logger.debug('[HF Parser] model: mode, converted URL:', url.href);
     } else {
       url = new URL(ctx.req.url); // e.g. https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main/DeepSeek-R1-UD-IQ1_M
       if (!endpointSet.has(url.hostname)) {
