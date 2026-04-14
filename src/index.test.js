@@ -12,6 +12,7 @@ import prepare from './api/prepare.js';
 import resolveBasePathParts from './api/resolveBasePathParts.js';
 import getMetaData from './api/getMetaData.js';
 import walkFiles from './api/walkFiles.js';
+import parseModelInput from './api/parseModelInput.js';
 
 /* eslint-disable no-undef */
 global.gopeed = {
@@ -53,6 +54,89 @@ describe('gopeed.events.onResolve', () => {
       };
       const expectedFilePath = `../assets/result_${index + 1}.json`;
       const expectedResult = JSON.parse(await readFile(new URL(expectedFilePath, import.meta.url)));
+
+      expect(result).toEqual(expectedResult);
+    }, 30000);
+  });
+});
+
+describe('parseModelInput', () => {
+  it('converts model:user/repo to https URL with default endpoint', () => {
+    expect(parseModelInput('model:user/repo').href).toBe('https://hf-mirror.com/user/repo/tree/main');
+  });
+
+  it('converts model:user/repo;endpoint to https URL with specified endpoint', () => {
+    expect(parseModelInput('model:user/repo;alpha.hf-mirror.com').href).toBe(
+      'https://alpha.hf-mirror.com/user/repo/tree/main',
+    );
+  });
+
+  it('converts model:datasets/user/repo to https URL with datasets prefix', () => {
+    expect(parseModelInput('model:datasets/user/repo').href).toBe(
+      'https://hf-mirror.com/datasets/user/repo/tree/main',
+    );
+  });
+
+  it('places subfolder after tree/main for single-level folder', () => {
+    expect(parseModelInput('model:user/repo/folder').href).toBe(
+      'https://hf-mirror.com/user/repo/tree/main/folder',
+    );
+  });
+
+  it('places subfolder after tree/main for multi-level folder', () => {
+    expect(parseModelInput('model:user/repo/folder/subfolder').href).toBe(
+      'https://hf-mirror.com/user/repo/tree/main/folder/subfolder',
+    );
+  });
+
+  it('places subfolder after tree/main when datasets prefix is used', () => {
+    expect(parseModelInput('model:datasets/user/repo/data').href).toBe(
+      'https://hf-mirror.com/datasets/user/repo/tree/main/data',
+    );
+  });
+
+  it('places subfolder after tree/main when explicit endpoint is given', () => {
+    expect(parseModelInput('model:user/repo/folder;alpha.hf-mirror.com').href).toBe(
+      'https://alpha.hf-mirror.com/user/repo/tree/main/folder',
+    );
+  });
+
+  it('falls back to default endpoint when semicolon is present but endpoint is empty', () => {
+    expect(parseModelInput('model:user/repo;').href).toBe('https://hf-mirror.com/user/repo/tree/main');
+  });
+
+  it('throws on input that does not start with model:', () => {
+    expect(() => parseModelInput('https://hf-mirror.com/user/repo')).toThrow('[HF Parser] parseModelInput called with invalid input');
+  });
+});
+
+describe('model: shorthand integration', () => {
+  // Each model: input is equivalent to an existing full-URL test case (same result file)
+  const modelLinks = [
+    { input: 'model:zaynchen/gopeed-extension-huggingface', resultFile: 'result_4.json' },
+    { input: 'model:zaynchen/gopeed-extension-huggingface/mock-repo', resultFile: 'result_5.json' },
+    { input: 'model:zaynchen/gopeed-extension-huggingface/mock-repo/models', resultFile: 'result_6.json' },
+    { input: 'model:zaynchen/gopeed-extension-huggingface;alpha.hf-mirror.com', resultFile: 'result_7.json' },
+    { input: 'model:zaynchen/gopeed-extension-huggingface/mock-repo;alpha.hf-mirror.com', resultFile: 'result_8.json' },
+    {
+      input: 'model:zaynchen/gopeed-extension-huggingface/mock-repo/models;alpha.hf-mirror.com',
+      resultFile: 'result_9.json',
+    },
+  ];
+
+  modelLinks.forEach(({ input, resultFile }) => {
+    it(`should return the correct response for ${input}`, async () => {
+      const url = parseModelInput(input);
+      const { baseUrl, user, repo, branch, protocol, port, pathParts } = prepare(url);
+
+      const [basePath, filePath] = resolveBasePathParts(pathParts);
+
+      const data = await getMetaData(basePath, filePath);
+      const result = {
+        name: user,
+        files: walkFiles(data, branch, basePath, protocol, baseUrl, port, repo),
+      };
+      const expectedResult = JSON.parse(await readFile(new URL(`../assets/${resultFile}`, import.meta.url)));
 
       expect(result).toEqual(expectedResult);
     }, 30000);

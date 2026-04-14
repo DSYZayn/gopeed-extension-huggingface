@@ -15,9 +15,11 @@
 ## 功能
 
 - ✅ 支援Huggingface的模型和數據集整個資料夾解析
-- ✅ 支援解析huggingface.co || <alpha.>hf-mirror.com || www.modelscope.cn 上同名的模型和數據集, 並自由指定來源站
+- ✅ 支援解析huggingface.co || hf-mirror.com || www.modelscope.cn 上同名的模型和數據集, 並自由指定來源站
 - ✅ 支援遞歸解析，並自動建立資料夾
 - ✅ 支援設定Cookie以便下載Gated Repo
+- ✅ 支援使用者自訂相容hf-mirror的端點
+- ✅ 支援 `model:` 私有協議模式 —— 直接輸入倉庫名稱，無需完整URL
 - ...
 
 ## 安裝
@@ -30,7 +32,7 @@
 
 `https://<baseUrl>/<user>/<repoType>/<repo>/tree/main/<path>`
 
-- **baseUrl**: huggingface.co || hf-mirror.com || www.modelscope.cn
+- **baseUrl**: huggingface.co || hf-mirror.com || alpha.hf-mirror.com || www.modelscope.cn || 自訂端點
 - **user**: 使用者名稱(組織名稱), 如deepseek-ai
 - **repoType**: models || datasets
 - **path**: 資料夾路徑， 如果是根目錄則不填, 連同`main/`最後的`/`一起去掉
@@ -38,6 +40,32 @@
 - 🔴 若要使用modelscope， 則需要該模型或數據集在huggingface中存在，否則無法解析。(modelscope缺少高效簡潔的倉庫元資訊API介面，如確有需要的歡迎PR)
 - ❗ 對於倉庫內的單檔案，則直接輸入你手動獲取的連結即可, 本插件對單檔案不做任何解析。
 - 🤷‍♂️ 解析時間與目錄深度和檔案數量有關，通常在3秒內可以完成大部分解析。
+
+### 倉庫私有協議模式
+
+在插件設定中開啟 **倉庫私有協議模式** 後，可以使用 `model:` 協議格式直接輸入倉庫名稱，插件將接管該輸入並解析為指定端點的檔案下載連結。
+
+**輸入格式：** `model:[user/repo]<;endpoint>`
+
+| 輸入 | 等效URL |
+|---|---|
+| `model:unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model:unsloth/DeepSeek-R1-GGUF;hf-mirror.com` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model:datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model:datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+
+- 未指定端點時，預設使用 `hf-mirror.com`。
+- 資料集請在倉庫路徑前加 `datasets/`。
+- `;` 後的端點可以是任意受支援或自訂的端點。
+- 該模式**預設開啟**，關閉時 `model:` 輸入將被忽略，不影響原有的URL解析方式。
+
+### 自訂端點
+
+如果你使用私有或第三方相容hf-mirror的端點，可以在插件設定中新增，插件會自動識別並解析來自該網域的連結：
+
+1. 開啟插件設定，找到 **Custom Endpoints（自訂端點）** 欄位。
+2. 輸入一個或多個網域名稱，多個網域以分號（`;`）分隔，例如：`mymirror.example.com;another.mirror.org`
+3. 儲存後，來自這些網域且符合HF樹狀URL格式的連結將被自動解析。
 
 ### Cookie 設定
 

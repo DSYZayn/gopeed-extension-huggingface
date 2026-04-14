@@ -15,9 +15,11 @@
 ## Features
 
 - ✅ Supports parsing entire folders of Huggingface models and datasets
-- ✅ Supports parsing models and datasets with the same name on huggingface.co || <alpha.>hf-mirror.com || www.modelscope.cn, and freely specifying the source station
+- ✅ Supports parsing models and datasets with the same name on huggingface.co || hf-mirror.com || www.modelscope.cn, and freely specifying the source station
 - ✅ Supports recursive parsing and automatically creates folders
 - ✅ Supports setting Cookie to download Gated Repo
+- ✅ Supports user-defined custom hf-mirror-compatible endpoints
+- ✅ Supports `model:` private protocol mode — enter a repo name directly without a full URL
 - ...
 
 ## Installation
@@ -30,7 +32,7 @@ Links in the following format can **parse all files in the folder**
 
 `https://<baseUrl>/<user>/<repoType>/<repo>/tree/main/<path>`
 
-- **baseUrl**: huggingface.co || hf-mirror.com || www.modelscope.cn
+- **baseUrl**: huggingface.co || hf-mirror.com || alpha.hf-mirror.com || www.modelscope.cn || custom endpoints
 - **user**: username (organization name), e.g., deepseek-ai
 - **repoType**: models || datasets
 - **path**: folder path, leave blank if it is the root directory, remove the `/` at the end of `main/`
@@ -38,6 +40,32 @@ Links in the following format can **parse all files in the folder**
 - 🔴 If using modelscope, the model or dataset must exist on huggingface, otherwise it cannot be parsed. (modelscope lacks an efficient and concise repository metadata API interface, welcome PR if needed)
 - ❗ For individual files within a repository, enter the link you manually obtained, this plugin does not parse individual files.
 - 🤷‍♂️ Parsing time depends on the depth of the directory and the number of files, typically completing most parsing within 3 seconds.
+
+### Model Private Protocol Mode
+
+When **仓库私有协议模式 (Model Private Protocol Mode)** is enabled in the extension settings, you can enter a repository name using the `model:` scheme directly instead of a full URL. The plugin intercepts this input and resolves it to file download links on the specified endpoint.
+
+**Input format:** `model:[user/repo]<;endpoint>`
+
+| Input | Equivalent URL |
+|---|---|
+| `model:unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model:unsloth/DeepSeek-R1-GGUF;hf-mirror.com` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model:datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model:datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+
+- The default endpoint is `hf-mirror.com` when none is specified.
+- For datasets, prefix the repo path with `datasets/`.
+- The endpoint after `;` can be any supported or custom endpoint.
+- When the mode is **enabled** (default), the `model:` input is handled. Disable it to skip `model:` inputs and leave URL-based parsing unaffected.
+
+### Custom Endpoints
+
+If you use a private or third-party hf-mirror-compatible endpoint, you can add it in the extension settings so the plugin will recognize and parse links from that domain:
+
+1. Open the extension settings and find the **Custom Endpoints** field.
+2. Enter one or more domain names, separated by semicolons (`;`), e.g. `mymirror.example.com;another.mirror.org`
+3. After saving, links from those domains that follow the HF tree URL format will be parsed automatically.
 
 ### Cookie Configuration
 
