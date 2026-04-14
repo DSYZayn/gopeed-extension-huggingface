@@ -16,7 +16,10 @@ const DEFAULT_REPO_ENDPOINT = 'hf-mirror.com';
 
 function buildEndpointSet() {
   const custom = gopeed.settings.customEndpoints
-    ? gopeed.settings.customEndpoints.split(';').map((e) => e.trim()).filter(Boolean)
+    ? gopeed.settings.customEndpoints
+        .split(';')
+        .map((e) => e.trim())
+        .filter(Boolean)
     : [];
   if (custom.length === 0) return KNOWN_ENDPOINTS;
   return new Set([...KNOWN_ENDPOINTS, ...custom]);
@@ -33,6 +36,7 @@ function buildEndpointSet() {
  * @returns {URL}
  */
 function parseModelInput(rawUrl) {
+  gopeed.logger.debug('[HF Parser] parseModelInput called with:', rawUrl);
   if (!rawUrl.startsWith('model://')) {
     throw new Error(`[HF Parser] parseModelInput called with invalid input: ${rawUrl}`);
   }
@@ -50,6 +54,7 @@ function parseModelInput(rawUrl) {
 }
 
 gopeed.events.onResolve(async function (ctx) {
+  gopeed.logger.debug('[HF Parser] ctx.req.url:', ctx.req.url);
   try {
     let url;
     const endpointSet = buildEndpointSet();

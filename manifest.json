@@ -13,7 +13,7 @@
     {
       "event": "onResolve",
       "match": {
-        "urls": ["*://huggingface.co/*", "*://hf-mirror.com/*", "*://www.modelscope.cn/*", "*://*/*/tree/*", "model://*"]
+        "urls": ["*://huggingface.co/*", "*://hf-mirror.com/*", "*://www.modelscope.cn/*", "model:*"]
       },
       "entry": "dist/index.js"
     }
