@@ -13,7 +13,7 @@
     {
       "event": "onResolve",
       "match": {
-        "urls": ["*://huggingface.co/*", "*://hf-mirror.com/*", "*://www.modelscope.cn/*", "*://alpha.hf-mirror.com/*", "*://cdn.hf-mirror.com/*", "*://*/*/tree/*", "repo:*"]
+        "urls": ["*://huggingface.co/*", "*://hf-mirror.com/*", "*://www.modelscope.cn/*", "*://*/*/tree/*", "model://*"]
       },
       "entry": "dist/index.js"
     }
@@ -33,8 +33,8 @@
     },
     {
       "name": "repoMode",
-      "title": "Repo Shorthand Mode",
-      "description": "Enable repo: shorthand input. Format: repo:[user/repo]<;endpoint>, e.g. repo:unsloth/DeepSeek-R1-GGUF or repo:datasets/open-thoughts/OpenThoughts-114k;cdn.hf-mirror.com. Default endpoint is hf-mirror.com when none is specified.",
+      "title": "仓库私有协议模式",
+      "description": "开启后，支持使用 model:// 私有协议输入格式。格式：model://[user/repo]<;endpoint>，例如 model://unsloth/DeepSeek-R1-GGUF 或 model://datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com。未指定端点时默认使用 hf-mirror.com。",
       "type": "bool"
     }
   ]

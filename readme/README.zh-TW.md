@@ -15,11 +15,11 @@
 ## 功能
 
 - ✅ 支援Huggingface的模型和數據集整個資料夾解析
-- ✅ 支援解析huggingface.co || <alpha.|cdn.>hf-mirror.com || www.modelscope.cn 上同名的模型和數據集, 並自由指定來源站
+- ✅ 支援解析huggingface.co || hf-mirror.com || www.modelscope.cn 上同名的模型和數據集, 並自由指定來源站
 - ✅ 支援遞歸解析，並自動建立資料夾
 - ✅ 支援設定Cookie以便下載Gated Repo
 - ✅ 支援使用者自訂相容hf-mirror的端點
-- ✅ 支援 `repo:` 簡寫模式 —— 直接輸入倉庫名稱，無需完整URL
+- ✅ 支援 `model://` 私有協議模式 —— 直接輸入倉庫名稱，無需完整URL
 - ...
 
 ## 安裝
@@ -32,7 +32,7 @@
 
 `https://<baseUrl>/<user>/<repoType>/<repo>/tree/main/<path>`
 
-- **baseUrl**: huggingface.co || hf-mirror.com || cdn.hf-mirror.com || alpha.hf-mirror.com || www.modelscope.cn || 自訂端點
+- **baseUrl**: huggingface.co || hf-mirror.com || www.modelscope.cn || 自訂端點
 - **user**: 使用者名稱(組織名稱), 如deepseek-ai
 - **repoType**: models || datasets
 - **path**: 資料夾路徑， 如果是根目錄則不填, 連同`main/`最後的`/`一起去掉
@@ -41,23 +41,23 @@
 - ❗ 對於倉庫內的單檔案，則直接輸入你手動獲取的連結即可, 本插件對單檔案不做任何解析。
 - 🤷‍♂️ 解析時間與目錄深度和檔案數量有關，通常在3秒內可以完成大部分解析。
 
-### 倉庫簡寫模式（Repo Shorthand Mode）
+### 倉庫私有協議模式
 
-在插件設定中開啟 **Repo Shorthand Mode（倉庫簡寫模式）** 後，可以直接輸入倉庫名稱，無需填寫完整URL。
+在插件設定中開啟 **倉庫私有協議模式** 後，可以使用 `model://` 協議格式直接輸入倉庫名稱，插件將接管該輸入並解析為指定端點的檔案下載連結。
 
-**輸入格式：** `repo:[user/repo]<;endpoint>`
+**輸入格式：** `model://[user/repo]<;endpoint>`
 
 | 輸入 | 等效URL |
 |---|---|
-| `repo:unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
-| `repo:unsloth/DeepSeek-R1-GGUF;cdn.hf-mirror.com` | `https://cdn.hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
-| `repo:datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
-| `repo:datasets/open-thoughts/OpenThoughts-114k;alpha.hf-mirror.com` | `https://alpha.hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model://unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model://unsloth/DeepSeek-R1-GGUF;hf-mirror.com` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model://datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model://datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
 
 - 未指定端點時，預設使用 `hf-mirror.com`。
 - 資料集請在倉庫路徑前加 `datasets/`。
 - `;` 後的端點可以是任意受支援或自訂的端點。
-- 該模式**預設關閉**，關閉時 `repo:` 輸入將被忽略，不影響原有的URL解析方式。
+- 該模式**預設關閉**，關閉時 `model://` 輸入將被忽略，不影響原有的URL解析方式。
 
 ### 自訂端點
 

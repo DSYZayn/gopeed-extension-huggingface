@@ -11,7 +11,7 @@ import resolveBasePathParts from './api/resolveBasePathParts.js';
 import getMetaData from './api/getMetaData.js';
 import walkFiles from './api/walkFiles.js';
 
-const KNOWN_ENDPOINTS = new Set(['huggingface.co', 'hf-mirror.com', 'alpha.hf-mirror.com', 'cdn.hf-mirror.com', 'www.modelscope.cn']);
+const KNOWN_ENDPOINTS = new Set(['huggingface.co', 'hf-mirror.com', 'www.modelscope.cn']);
 const DEFAULT_REPO_ENDPOINT = 'hf-mirror.com';
 
 function buildEndpointSet() {
@@ -23,17 +23,20 @@ function buildEndpointSet() {
 }
 
 /**
- * Parse a repo: shorthand URL into a standard https:// URL.
+ * Parse a model:// private-protocol URL into a standard https:// URL.
  * Formats:
- *   repo:user/repo                        → https://hf-mirror.com/user/repo/tree/main
- *   repo:user/repo;cdn.hf-mirror.com      → https://cdn.hf-mirror.com/user/repo/tree/main
- *   repo:datasets/user/repo               → https://hf-mirror.com/datasets/user/repo/tree/main
- *   repo:datasets/user/repo;alpha.hf-mirror.com → https://alpha.hf-mirror.com/datasets/user/repo/tree/main
+ *   model://user/repo                   → https://hf-mirror.com/user/repo/tree/main
+ *   model://user/repo;hf-mirror.com     → https://hf-mirror.com/user/repo/tree/main
+ *   model://datasets/user/repo          → https://hf-mirror.com/datasets/user/repo/tree/main
+ *   model://datasets/user/repo;custom   → https://custom/datasets/user/repo/tree/main
  * @param {string} rawUrl
  * @returns {URL}
  */
-function parseRepoInput(rawUrl) {
-  const content = rawUrl.slice('repo:'.length).trim();
+function parseModelInput(rawUrl) {
+  if (!rawUrl.startsWith('model://')) {
+    throw new Error(`[HF Parser] parseModelInput called with invalid input: ${rawUrl}`);
+  }
+  const content = rawUrl.slice('model://'.length).trim();
   const semicolonIdx = content.indexOf(';');
   let repoPath, endpoint;
   if (semicolonIdx !== -1) {
@@ -49,21 +52,22 @@ function parseRepoInput(rawUrl) {
 gopeed.events.onResolve(async function (ctx) {
   try {
     let url;
+    const endpointSet = buildEndpointSet();
 
-    if (ctx.req.url.startsWith('repo:')) {
+    if (ctx.req.url.startsWith('model://')) {
       if (!gopeed.settings.repoMode) {
-        gopeed.logger.debug('[HF Parser] repo: mode disabled, skipping');
+        gopeed.logger.debug('[HF Parser] model:// mode disabled, skipping');
         return;
       }
-      url = parseRepoInput(ctx.req.url);
-      if (!buildEndpointSet().has(url.hostname)) {
-        gopeed.logger.error('[HF Parser] repo: endpoint not in allowed list:', url.hostname);
+      url = parseModelInput(ctx.req.url);
+      if (!endpointSet.has(url.hostname)) {
+        gopeed.logger.error('[HF Parser] model:// endpoint not in allowed list:', url.hostname);
         return;
       }
-      gopeed.logger.debug('[HF Parser] repo: mode, converted URL:', url.href);
+      gopeed.logger.debug('[HF Parser] model:// mode, converted URL:', url.href);
     } else {
       url = new URL(ctx.req.url); // e.g. https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main/DeepSeek-R1-UD-IQ1_M
-      if (!buildEndpointSet().has(url.hostname)) {
+      if (!endpointSet.has(url.hostname)) {
         gopeed.logger.debug('[HF Parser] Skipping unrecognized host:', url.hostname);
         return;
       }

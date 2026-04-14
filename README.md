@@ -15,11 +15,11 @@
 ## Features
 
 - ✅ Supports parsing entire folders of Huggingface models and datasets
-- ✅ Supports parsing models and datasets with the same name on huggingface.co || <alpha.|cdn.>hf-mirror.com || www.modelscope.cn, and freely specifying the source station
+- ✅ Supports parsing models and datasets with the same name on huggingface.co || hf-mirror.com || www.modelscope.cn, and freely specifying the source station
 - ✅ Supports recursive parsing and automatically creates folders
 - ✅ Supports setting Cookie to download Gated Repo
 - ✅ Supports user-defined custom hf-mirror-compatible endpoints
-- ✅ Supports `repo:` shorthand mode — enter a repo name directly without a full URL
+- ✅ Supports `model://` private protocol mode — enter a repo name directly without a full URL
 - ...
 
 ## Installation
@@ -32,7 +32,7 @@ Links in the following format can **parse all files in the folder**
 
 `https://<baseUrl>/<user>/<repoType>/<repo>/tree/main/<path>`
 
-- **baseUrl**: huggingface.co || hf-mirror.com || cdn.hf-mirror.com || alpha.hf-mirror.com || www.modelscope.cn || custom endpoints
+- **baseUrl**: huggingface.co || hf-mirror.com || www.modelscope.cn || custom endpoints
 - **user**: username (organization name), e.g., deepseek-ai
 - **repoType**: models || datasets
 - **path**: folder path, leave blank if it is the root directory, remove the `/` at the end of `main/`
@@ -41,23 +41,23 @@ Links in the following format can **parse all files in the folder**
 - ❗ For individual files within a repository, enter the link you manually obtained, this plugin does not parse individual files.
 - 🤷‍♂️ Parsing time depends on the depth of the directory and the number of files, typically completing most parsing within 3 seconds.
 
-### Repo Shorthand Mode
+### Model Private Protocol Mode
 
-When **Repo Shorthand Mode** is enabled in the extension settings, you can enter a repository name directly instead of a full URL.
+When **仓库私有协议模式 (Model Private Protocol Mode)** is enabled in the extension settings, you can enter a repository name using the `model://` scheme directly instead of a full URL. The plugin intercepts this input and resolves it to file download links on the specified endpoint.
 
-**Input format:** `repo:[user/repo]<;endpoint>`
+**Input format:** `model://[user/repo]<;endpoint>`
 
 | Input | Equivalent URL |
 |---|---|
-| `repo:unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
-| `repo:unsloth/DeepSeek-R1-GGUF;cdn.hf-mirror.com` | `https://cdn.hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
-| `repo:datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
-| `repo:datasets/open-thoughts/OpenThoughts-114k;alpha.hf-mirror.com` | `https://alpha.hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model://unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model://unsloth/DeepSeek-R1-GGUF;hf-mirror.com` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `model://datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `model://datasets/open-thoughts/OpenThoughts-114k;hf-mirror.com` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
 
 - The default endpoint is `hf-mirror.com` when none is specified.
 - For datasets, prefix the repo path with `datasets/`.
 - The endpoint after `;` can be any supported or custom endpoint.
-- When the mode is **disabled** (default), the `repo:` input is ignored and existing URL-based parsing is unaffected.
+- When the mode is **disabled** (default), the `model://` input is ignored and existing URL-based parsing is unaffected.
 
 ### Custom Endpoints
 
