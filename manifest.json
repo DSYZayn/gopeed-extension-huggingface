@@ -13,7 +13,7 @@
     {
       "event": "onResolve",
       "match": {
-        "urls": ["*://huggingface.co/*", "*://hf-mirror.com/*", "*://www.modelscope.cn/*", "*://alpha.hf-mirror.com/*", "*://cdn.hf-mirror.com/*", "*://*/*/tree/*"]
+        "urls": ["*://huggingface.co/*", "*://hf-mirror.com/*", "*://www.modelscope.cn/*", "*://alpha.hf-mirror.com/*", "*://cdn.hf-mirror.com/*", "*://*/*/tree/*", "repo:*"]
       },
       "entry": "dist/index.js"
     }
@@ -30,6 +30,12 @@
       "title": "Custom Endpoints",
       "description": "Add custom hf-mirror-compatible endpoints to trigger parsing, separate multiple entries with semicolons (;), e.g. mymirror.example.com;another.mirror.org",
       "type": "string"
+    },
+    {
+      "name": "repoMode",
+      "title": "Repo Shorthand Mode",
+      "description": "Enable repo: shorthand input. Format: repo:[user/repo]<;endpoint>, e.g. repo:unsloth/DeepSeek-R1-GGUF or repo:datasets/open-thoughts/OpenThoughts-114k;cdn.hf-mirror.com. Default endpoint is hf-mirror.com when none is specified.",
+      "type": "bool"
     }
   ]
 }

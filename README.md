@@ -19,6 +19,7 @@
 - ✅ Supports recursive parsing and automatically creates folders
 - ✅ Supports setting Cookie to download Gated Repo
 - ✅ Supports user-defined custom hf-mirror-compatible endpoints
+- ✅ Supports `repo:` shorthand mode — enter a repo name directly without a full URL
 - ...
 
 ## Installation
@@ -39,6 +40,24 @@ Links in the following format can **parse all files in the folder**
 - 🔴 If using modelscope, the model or dataset must exist on huggingface, otherwise it cannot be parsed. (modelscope lacks an efficient and concise repository metadata API interface, welcome PR if needed)
 - ❗ For individual files within a repository, enter the link you manually obtained, this plugin does not parse individual files.
 - 🤷‍♂️ Parsing time depends on the depth of the directory and the number of files, typically completing most parsing within 3 seconds.
+
+### Repo Shorthand Mode
+
+When **Repo Shorthand Mode** is enabled in the extension settings, you can enter a repository name directly instead of a full URL.
+
+**Input format:** `repo:[user/repo]<;endpoint>`
+
+| Input | Equivalent URL |
+|---|---|
+| `repo:unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `repo:unsloth/DeepSeek-R1-GGUF;cdn.hf-mirror.com` | `https://cdn.hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `repo:datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `repo:datasets/open-thoughts/OpenThoughts-114k;alpha.hf-mirror.com` | `https://alpha.hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+
+- The default endpoint is `hf-mirror.com` when none is specified.
+- For datasets, prefix the repo path with `datasets/`.
+- The endpoint after `;` can be any supported or custom endpoint.
+- When the mode is **disabled** (default), the `repo:` input is ignored and existing URL-based parsing is unaffected.
 
 ### Custom Endpoints
 

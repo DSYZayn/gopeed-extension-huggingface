@@ -19,6 +19,7 @@
 - ✅ 支持递归解析，并自动创建文件夹
 - ✅ 支持设置Cookie以便下载Gated Repo
 - ✅ 支持用户自定义兼容hf-mirror的端点
+- ✅ 支持 `repo:` 简写模式 —— 直接输入仓库名称，无需完整URL
 - ...
 
 ## 安装
@@ -39,6 +40,24 @@
 - 🔴 若要使用modelscope， 则需要该模型或数据集在huggingface中存在，否则无法解析。(modelscope缺少高效简洁的仓库元信息API接口，如确有需要的欢迎PR)
 - ❗ 对于仓库内的单文件，则直接输入你手动获取的链接即可, 本插件不对单文件进行任何解析。
 - 🤷‍♂️ 解析用时与目录深度和文件数量有关，通常在3s内可以完成大部分解析。
+
+### 仓库简写模式（Repo Shorthand Mode）
+
+在插件设置中开启 **Repo Shorthand Mode（仓库简写模式）** 后，可以直接输入仓库名称，无需填写完整URL。
+
+**输入格式：** `repo:[user/repo]<;endpoint>`
+
+| 输入 | 等效URL |
+|---|---|
+| `repo:unsloth/DeepSeek-R1-GGUF` | `https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `repo:unsloth/DeepSeek-R1-GGUF;cdn.hf-mirror.com` | `https://cdn.hf-mirror.com/unsloth/DeepSeek-R1-GGUF/tree/main` |
+| `repo:datasets/open-thoughts/OpenThoughts-114k` | `https://hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+| `repo:datasets/open-thoughts/OpenThoughts-114k;alpha.hf-mirror.com` | `https://alpha.hf-mirror.com/datasets/open-thoughts/OpenThoughts-114k/tree/main` |
+
+- 未指定端点时，默认使用 `hf-mirror.com`。
+- 数据集请在仓库路径前加 `datasets/`。
+- `;` 后的端点可以是任意受支持或自定义的端点。
+- 该模式**默认关闭**，关闭时 `repo:` 输入将被忽略，不影响原有的URL解析方式。
 
 ### 自定义端点
 
