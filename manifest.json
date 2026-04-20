@@ -2,7 +2,7 @@
   "name": "gopeed-extention-huggingface",
   "author": "zayn",
   "title": "Huggingface下载",
-  "description": "支持Huggingface模型、数据集的文件夹解析下载, 可自由替换 Huggingface下载地址\n使用方法请看主页",
+  "description": "一键下载Huggingface模型、数据集, 可自由替换 Huggingface下载地址。支持model:仓库名称和链接解析两种方式，具体使用方法请看主页",
   "icon": "./assets/icon.png",
   "version": "1.0.9",
   "homepage": "https://github.com/DSYZayn/gopeed-extension-huggingface",
