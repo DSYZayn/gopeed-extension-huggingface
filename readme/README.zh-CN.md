@@ -24,7 +24,9 @@
 
 ## 安装
 
-在插件页面输入`https://github.com/DSYZayn/gopeed-extension-huggingface.git`下载即可安装
+在插件页面输入`https://github.com/DSYZayn/gopeed-extension-huggingface.git`下载即可安装  
+`gopeed-extension-huggingface`已经在官方gopeed插件市场上线
+<img width="1689" height="1011" alt="image" src="https://github.com/user-attachments/assets/b5ae8ff2-c970-40d6-8665-6c397e4bc7aa" />
 
 ## 使用
 
