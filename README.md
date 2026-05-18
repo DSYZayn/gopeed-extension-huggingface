@@ -25,6 +25,9 @@
 ## Installation
 
 Enter `https://github.com/DSYZayn/gopeed-extension-huggingface.git` on the plugin page to download and install
+`gopeed-extension-huggingface` has launched on official gopeed market.
+<img width="1689" height="1011" alt="image" src="https://github.com/user-attachments/assets/693b08b6-c008-48bd-abf6-d266638f23aa" />
+
 
 ## Usage
 
